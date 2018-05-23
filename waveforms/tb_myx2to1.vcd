@@ -1,0 +1,40 @@
+$date
+  Wed May 23 15:10:53 2018
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$var reg 8 ! i0[7:0] $end
+$var reg 8 " i1[7:0] $end
+$var reg 1 # s $end
+$scope module dut $end
+$var reg 8 $ i0[7:0] $end
+$var reg 8 % i1[7:0] $end
+$var reg 1 & s $end
+$var reg 8 ' f[7:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+b01111010 !
+b00010101 "
+0#
+b01111010 $
+b00010101 %
+0&
+b01111010 '
+#44000000
+1#
+1&
+b00010101 '
+#133000000
+0#
+0&
+b01111010 '
+#204000000
+1#
+1&
+b00010101 '
+#1315000000
