@@ -219,20 +219,20 @@ begin\n\
 	drive_p: process\n\
 	  	begin\n\
 			\n\
-			\n\
-			wait for 23 ns;\n\
-			reset <= '1';\n\
-			enable <= '0';\n\
-			wait until rising_edge(clk);\n\
-			PB <= \"" + np.binary_repr(0, width=N) + "\";\n\
-			wait for 40 ns;\n\
-			reset <= '0';\n\
-			wait until rising_edge(clk);\n\
-			enable <= '1';\n\
-			wait until rising_edge(clk);\n\
-			\n\
-			\n\
-"
+			"
+
+for i in range(0, 10): # px**2 is the size of PA_array and PB_array
+	tb += '\n\t\t\tPA <= "' + np.binary_repr(np.random.random_integers(2**N-1), width=N) + '";'
+	tb += '\n\t\t\tPB <= "' + np.binary_repr(np.random.random_integers(2**N-1), width=N) + '";'
+	tb += '\n\t\t\twait until rising_edge(clk);'
+	tb += '\n'
+
+tb += '\n\t\t\tPA <= "' + np.binary_repr(0, width=N) + '";'
+tb += '\n\t\t\tPB <= "' + np.binary_repr(0, width=N) + '";'
+tb += '\n\t\t\twait until rising_edge(clk);'
+tb += '\n'
+
+tb += "\n-----------------------\n\n"
 
 for i in range(0, px**2): # px**2 is the size of PA_array and PB_array
 	tb += '\n\t\t\tPA <= "' + np.binary_repr(PA_array[i], width=N) + '";'
@@ -240,33 +240,17 @@ for i in range(0, px**2): # px**2 is the size of PA_array and PB_array
 	tb += '\n\t\t\twait until rising_edge(clk);'
 	tb += '\n'
 
-tb += "\
-			----------------------------------------\n\
-			wait for 50 ns;\n\
-			reset <= '1';\n\
-			wait for 72 ns;\n\
-			reset <='0';\n\
-			\n\
-			----------------------------------------\n\
-"
 
 
-for i in range(0, px**2): # px**2 is the size of PA_array and PB_array
-	# insert "random" enable swtching 
-	if i==int(0.1 * px**2):
-		tb += "\n\t\t\tenable <= '0';"
-	if i==int(0.2 * px**2):
-		tb += "\n\t\t\tenable <= '1';"
+# add again random PA and PB
+for j in range(4):
+	tb += "\n\n------------------------------------------\n\n"
 
-	if i==int(0.4 * px**2):
-		tb += "\n\t\t\treset <= '1';"
-	if i==int(0.42 * px**2):
-		tb += "\n\t\t\treset <= '0';"
-
-	tb += '\n\t\t\tPA <= "' + np.binary_repr(PA_array[i], width=N) + '";'
-	tb += '\n\t\t\tPB <= "' + np.binary_repr(PB_array[i], width=N) + '";'
-	tb += '\n\t\t\twait until rising_edge(clk);'
-	tb += '\n\n'
+	for i in range(0, px**2): # px**2 is the size of PA_array and PB_array
+		tb += '\n\t\t\tPA <= "' + np.binary_repr(np.random.random_integers(2**N-1), width=N) + '";'
+		tb += '\n\t\t\tPB <= "' + np.binary_repr(np.random.random_integers(2**N-1), width=N) + '";'
+		tb += '\n\t\t\twait until rising_edge(clk);'
+		tb += '\n'
 
 
 
@@ -274,33 +258,64 @@ tb += "\n\
 			----------------------------------\n\
 \n\
 \n\
-	  		wait for 190 ns;\n\
+	  		wait for 3330 ns;\n\
 	  		testing <= False;\n\
 	  		wait;\n\
 	  	end process;\n\
 \n\
-	  	--drive_rst: process\n\
-	  	--begin\n\
-	  	--	wait for 80 ns;\n\
-	    --	reset <= '1';\n\
-	  	--	wait for 40 ns;\n\
-	  	--	reset <= '0';\n\
-	  	--	wait until rising_edge(clk);\n\
-	  	--	wait;\n\
-	  	--end process;\n\
+	  	\n\
+	  	drive_rst: process\n\
+	  	begin\n\
+	  		reset <= '0';\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		reset <= '1';\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		reset <= '0';\n\
+	  		wait for 1500 ns;\n\
+	  		reset <= '1';\n\
+	  		wait for 330 ns;\n\
+	  		reset <= '0';\n\
+	  		wait for 2000 ns;\n\
+	  		reset <= '1';\n\
+	  		wait for 100 ns;\n\
+	  		reset <= '0';\n\
+	  		wait for 3000 ns;\n\
+\n\
+	  		wait;\n\
+	  	end process;\n\
 \n\
 \n\
-	  	--drive_en : process\n\
-	  	--begin\n\
-  		--	wait for 44 ns;\n\
-	  	--	enable <= '1';\n\
-	  	--	wait for 89 ns;\n\
-	  	--	enable <= '0';\n\
-	  	--	wait for 71 ns;\n\
-		--	enable <= '1';\n\
-	  	--	wait for 1111 ns;\n\
-	  	--	wait;\n\
-	  	--end process;\n\
+\n\
+	  	drive_en : process\n\
+	  	begin\n\
+	  		enable <= '1';\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		enable <= '0';\n\
+	  		wait until rising_edge(clk);\n\
+	  		wait until rising_edge(clk);\n\
+	  		enable <= '1';\n\
+	  		wait for 3000 ns;\n\
+	  		enable <= '0';\n\
+	  		wait for 200 ns;\n\
+	  		enable <= '1';\n\
+	  		wait for 2400 ns;\n\
+	  	end process;\n\
 \n\
 end architecture;\n\
 \n\

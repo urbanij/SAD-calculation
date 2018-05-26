@@ -53,8 +53,8 @@ architecture beh of tb2_SAD is
 
 
 	-- segnali in ingresso
-	signal PA 	: std_logic_vector(7 downto 0)	:= "00000101";
-	signal PB 	: std_logic_vector(7 downto 0)	:= "00001010";
+	signal PA 	: std_logic_vector(7 downto 0)	:= x"01";
+	signal PB 	: std_logic_vector(7 downto 0)	:= x"00";
 	signal clk	: std_logic				:= '0';
 	signal reset	: std_logic				:= '0';
 	signal enable 	: std_logic				:= '1';

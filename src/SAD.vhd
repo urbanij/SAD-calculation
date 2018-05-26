@@ -107,18 +107,32 @@ architecture struct of SAD is
 		) ;
 	end component;
 
+	component SISOreg is
+		generic (N  : positive := 3);
+		port (
+			SI   : in std_logic;
+			clk  : in std_logic;
+			rst  : in std_logic;
+			SO   : out std_logic
+		);
+
+	end component;
+
+
 
 	-- intermediate signals
 	signal padding          : std_logic_vector(SAD_bits-Nbit-1 downto 0); -- turn the input to the subtractor into M bits, i.e. adds M-N bits ahead of PA/PB respectively
 	signal PA_to_sub_nbit   : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the reg on the PA side to the subtractor
 	signal PB_to_sub_nbit   : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the reg on the PB side to the subtractor
-	signal PA_to_sub_mbit   : std_logic_vector(SAD_bits-1 downto 0); -- turning PA to M bits
-	signal PB_to_sub_mbit   : std_logic_vector(SAD_bits-1 downto 0); -- turning PB to M bits
+	--signal PA_to_sub_mbit   : std_logic_vector(SAD_bits-1 downto 0); -- turning PA to M bits
+	--signal PB_to_sub_mbit   : std_logic_vector(SAD_bits-1 downto 0); -- turning PB to M bits
 
-	signal sub_to_rca       : std_logic_vector(SAD_bits-1 downto 0); -- connection from the out of the subtractor    to one input of the rca
+	signal sub_to_rca_nbits       : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the subtractor    to one input of the rca
+	signal sub_to_rca_SADbits       : std_logic_vector(SAD_bits-1 downto 0);
 	signal reg_to_rca       : std_logic_vector(SAD_bits-1 downto 0); -- connection from the out of the loop register to one input of the rca
 
-	
+	signal counter_in  : std_logic;
+
 	signal rca_out          : std_logic_vector(SAD_bits-1 downto 0); -- rca output wire
 	
 	signal mux_to_reg_out_wire   : std_logic_vector(SAD_bits-1 downto 0);
@@ -153,18 +167,16 @@ begin
 		padding(i) <= '0';
 	end generate;
 
-	PA_to_sub_mbit <= padding & PA_to_sub_nbit;
-	PB_to_sub_mbit <= padding & PB_to_sub_nbit;
-
+	sub_to_rca_SADbits <= padding & sub_to_rca_nbits;
 
 
 	sub: subtractor
-		generic map(SAD_bits)
-		port map(PA_to_sub_mbit, PB_to_sub_mbit, sub_to_rca);
+		generic map(Nbit)
+		port map(PA_to_sub_nbit, PB_to_sub_nbit, sub_to_rca_nbits);
 
 	add: rca
 		generic map(SAD_bits)
-		port map(sub_to_rca, reg_to_rca, '0', rca_out, open);
+		port map(sub_to_rca_SADbits, reg_to_rca, '0', rca_out, open);
 
 	reg_loop: reg
 		generic map(SAD_bits)
@@ -178,9 +190,13 @@ begin
 		generic map(SAD_bits)
 		port map (CLK, RST, mux_to_reg_out_wire, sad_wire);
 
+	siso: SISOreg
+		generic map(3)
+		port map(EN, CLK, RST, counter_in);
+
 	cnt: upcounter
 		generic map(8) -- warning: review this  -- [ ceil(log2(px^2)) ?]
-		port map(CLK, EN, RST, open, tc_wire);
+		port map(CLK, counter_in, RST, open, tc_wire);
 
 	sr : SR_latch
 		port map(s_latch_wire, RST, sr_q_wire, open);
