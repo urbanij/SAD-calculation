@@ -21,7 +21,7 @@ use ieee.numeric_std.all; -- needed for unsigned
 -- usual upcounter which counts up to 2^Nbit -1 with
 -- an additional output port called tc which becomes 1 if every bit of q is 1.
 entity upcounter is
-	generic (Nbit : natural := 8);
+	generic (Nbit : natural :=8);
 	port (
 		count_puls   : in std_logic;
 		count_enable : in std_logic;

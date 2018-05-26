@@ -10,10 +10,11 @@ Created on Fri May 18 15:41:14 CEST 2018
 @descritpion : Python model for the SAD calculation algorithm written in VHDL.
                It performs a model of the systems and it generates a coherent test bench.
 
-               2^N >= 255 * px^2
+               
 """
 
 import sys
+# import os
 import time
 import numpy as np
 from pylab import *
@@ -25,16 +26,22 @@ def insert_N_and_px():
 
 
 # -----------------------------
+TB_FOLDER = "../tb/"
 SHOW_PLOT = 0  # set to 1 to show the plot
-# N         = 8  # bits
-# px        = 16 # num pixels. actually 16*16 is the num of pixels
+# N         = 8  # num of bits representing each pixel
+                 # the image is supposed to be monochrome, so since a monochrome
+                 # grade is expressed by a number between 0 and 255, 8 bits
+                 # are necessary in order not to loose the information. 
+# px        = 16 # num pixels per side. 16^2 is the actual number of pixels, supposing the image to be square
+# SAD_bits  = 16 # num of bits representig the SAD value. This disequality has to be
+                 # valid in order not to loose information: 2^SAD_bits >= (2^N-1) * px^2
 # -----------------------------
 
 
 
 now_ = time.ctime()[:20] + time.tzname[1] + " " + time.ctime()[20:]
 
-prompt_ = input("\nWARNING\nYou're about to overwrite the file tb_SAD.vhd.\nDo you want to proceed? [y/n]\n")
+prompt_ = input("\nWARNING\nYou're about to overwrite the file tb_SAD.vhd.\nDo you want to proceed? [y/n]: ")
 try:
 	if prompt_.lower() == "y":
 		N, px = insert_N_and_px()
@@ -66,11 +73,13 @@ PA_array = np.asarray(PA).reshape(-1)
 PB_array = np.asarray(PB).reshape(-1)
 
 DIFF_array = np.asarray(DIFF).reshape(-1)
+
 SAD_sequence = []
 for i in range(0, px**2):
 	SAD_sequence.append(np.sum(DIFF_array[:i+1]))
 SAD_sequence = np.array(SAD_sequence)
 # print (SAD_sequence)
+
 SAD = SAD_sequence.reshape((px,px))
 print (SAD)
 
@@ -82,10 +91,10 @@ SAD_value = np.sum(DIFF_array)
 
 print ("SAD value = %d" %SAD_value)
 
-M = int(np.ceil(np.log2((2**N-1) * px**2 ))) # minimum number of bit to correctly represent the SAD value
-print ("Min num bits to represent correctly the SAD value = " + str(M))
+SAD_bits = int(np.ceil(np.log2((2**N-1) * px**2 ))) # minimum number of bit to correctly represent the SAD value
+print ("Min num bits to represent correctly the SAD value = " + str(SAD_bits))
 
-SAD_value_bin = np.binary_repr(SAD_value, width=M)
+SAD_value_bin = np.binary_repr(SAD_value, width=SAD_bits)
 
 # to show the matrices PA, PB and SAD in the initial comment of the test bench
 PA_string = ""
@@ -129,13 +138,13 @@ tb = "\
 \n\
 \n\
 -- INPUTS:\n\
--- N  = " + str(N) + " bit\n\
+-- N  = " + str(N) + " bits\n\
 -- px = " + str(px) + "\n\
 \n\
--- M_min := min num bits to correctly represent SAD\n\
--- M_min = ceil( log2( (2**N-1) * px**2 )) = \n\
---       = ceil( log2( " + str(2**N-1) + " * "+ str(px*px) +" )) = \n\
---       = " + str(M) + "\n\
+-- SAD_bits_min := min num bits to correctly represent SAD\n\
+-- SAD_bits_min = ceil( log2( (2**N-1) * px**2 )) = \n\
+--              = ceil( log2( " + str(2**N-1) + " * "+ str(px*px) +" )) = \n\
+--              = " + str(SAD_bits) + "\n\
 \n\
 \n\
 -- PA = " + str(PA_string) + "\n\
@@ -153,7 +162,7 @@ tb+="-- SAD_value = sum(SAD) = " + str(SAD_value) + " = \"" + str(SAD_value_bin)
 library ieee;\n\
 use ieee.std_logic_1164.all;\n\
 --use ieee.std_logic_unsigned.all;\n\
---use ieee.numeric_std.all;\n\
+use ieee.numeric_std.all;\n\
 \n\
 \n\
 entity tb_SAD is\n\
@@ -164,24 +173,27 @@ architecture struct of tb_SAD is\n\
 	\n\
 	component SAD is\n\
 		generic(\n\
-			N          : positive := " + str(N) + ";\n\
-			M          : positive := " + str(M) + "\n\
+			Npixel     : positive := " + str(px) + ";      -- total # of pixels of the image\n\
+			\n\
+			Nbit       : positive := " + str(N) + ";        -- # of bits needed to represent the value of each pixel\n\
+			SAD_bits   : positive := " + str(SAD_bits) + " 	-- # of bits needed to represent the output\n\
 		);\n\
 		port(\n\
 			CLK        : in  std_logic;\n\
 			RST        : in  std_logic;\n\
 			EN         : in  std_logic;\n\
-			PA         : in  std_logic_vector(N-1  downto 0);\n\
-			PB         : in  std_logic_vector(N-1  downto 0);\n\
+			PA         : in  std_logic_vector(Nbit-1  downto 0);\n\
+			PB         : in  std_logic_vector(Nbit-1  downto 0);\n\
 			\n\
-			SAD        : out std_logic_vector(M-1 downto 0); \n\
+			SAD        : out std_logic_vector(SAD_bits-1 downto 0); \n\
 			DATA_VALID : out std_logic\n\
 		);\n\
 	end component SAD;\n\
 \n\
 \n\
+	constant Npixel  : positive := 16;\n\
 	constant Nbit    : positive := " + str(N) + ";\n\
-	constant Mbit    : positive := " + str(M) + ";\n\
+	constant Mbit    : positive := " + str(SAD_bits) + ";\n\
 	constant clk_per : time     := 5 ns;\n\
 \n\
 	signal clk       : std_logic := '0';\n\
@@ -200,7 +212,7 @@ begin\n\
 \n\
 \n\
 	sad_i: SAD\n\
-		generic map(Nbit, Mbit)\n\
+		generic map(Npixel, Nbit, Mbit)\n\
 		port map(clk, reset, enable, PA, PB, open, open);\n\
 \n\
 \n\
@@ -218,6 +230,8 @@ begin\n\
 			wait until rising_edge(clk);\n\
 			enable <= '1';\n\
 			wait until rising_edge(clk);\n\
+			\n\
+			\n\
 "
 
 for i in range(0, px**2): # px**2 is the size of PA_array and PB_array
@@ -232,6 +246,7 @@ tb += "\
 			reset <= '1';\n\
 			wait for 72 ns;\n\
 			reset <='0';\n\
+			\n\
 			----------------------------------------\n\
 "
 
@@ -251,7 +266,7 @@ for i in range(0, px**2): # px**2 is the size of PA_array and PB_array
 	tb += '\n\t\t\tPA <= "' + np.binary_repr(PA_array[i], width=N) + '";'
 	tb += '\n\t\t\tPB <= "' + np.binary_repr(PB_array[i], width=N) + '";'
 	tb += '\n\t\t\twait until rising_edge(clk);'
-	tb += '\n'
+	tb += '\n\n'
 
 
 
@@ -291,7 +306,7 @@ end architecture;\n\
 \n\
 "
 
-with open("../tb/tb_SAD.vhd", "w") as f:
+with open(TB_FOLDER+"tb_SAD.vhd", "w") as f:
 	f.write(tb)
 
 

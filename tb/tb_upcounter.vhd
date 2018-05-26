@@ -23,9 +23,9 @@ entity tb_upcounter is
 end tb_upcounter;
 
 architecture beh of tb_upcounter is
-
+	
 	component upcounter
-		generic (Nbit : natural := 8); -- counter MOD 2^Nbit
+		generic (Nbit : natural :=8 ); -- counter MOD 2^Nbit
 		port (
 			count_puls   : in std_logic;
 			count_enable : in std_logic;
@@ -38,6 +38,7 @@ architecture beh of tb_upcounter is
 	signal clk          : std_logic := '0';
 	signal count_enable : std_logic := '1';
 	signal rst          : std_logic := '1';
+
 
 	constant clk_T  : time := 10 ns;  
 	signal   clk_go : std_logic := '1';
