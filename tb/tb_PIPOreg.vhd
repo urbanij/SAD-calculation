@@ -1,8 +1,8 @@
 ---------------------------------------------
--- Title       : tb_reg
+-- Title       : tb_PIPOreg
 -- Project     : Final project: SAD Calculation
 ---------------------------------------------
--- File        : tb_reg.vhd
+-- File        : tb_PIPOreg.vhd
 -- Language    : VHDL
 -- Author(s)   : Francesco Urbani
 -- Company     : 
@@ -16,15 +16,15 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity tb_reg is
-end tb_reg;
+entity tb_PIPOreg is
+end tb_PIPOreg;
 
 
-architecture rtl of tb_reg is
+architecture rtl of tb_PIPOreg is
 
 	constant N       : positive := 8;
 
-	component reg is
+	component PIPOreg is
 		generic (N : positive );
 		port (
 			clk     : in  std_logic;
@@ -48,7 +48,7 @@ architecture rtl of tb_reg is
 		clk_ext <= NOT clk_ext AFTER clk_per/2 WHEN Testing;-- ELSE '0';
 
 
-		i_dut: reg 
+		i_dut: PIPOreg 
 			generic map (N)
 			port map(clk_ext, reset, d_in, open);
 

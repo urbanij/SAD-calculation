@@ -6,9 +6,14 @@ Created on Fri May 18 15:41:14 CEST 2018
 
 @project     : Final project: SAD Calculation
 @author(s)   : Francesco Urbani
+
 @file        : tb_SAD_generator.py
 @descritpion : Python model for the SAD calculation algorithm written in VHDL.
                It performs a model of the systems and it generates a coherent test bench.
+
+               The result is then printed in the header of the test bench file tb_SAD.vhd,
+               which consist in two matrices representing the 2 monochrome images,
+               a absolute difference matrix and the value of the sum of those values, i.e. the SAD value.
 
                
 """
@@ -94,6 +99,15 @@ print ("SAD value = %d" %SAD_value)
 SAD_bits = int(np.ceil(np.log2((2**N-1) * px**2 ))) # minimum number of bit to correctly represent the SAD value
 print ("Min num bits to represent correctly the SAD value = " + str(SAD_bits))
 
+q = input("Do you want to change the number of bits of SAD value? [y/n]")
+if q.lower() == 'y':
+	SAD_bits = int(input("Insert number of bits to represent the SAD value.\nNote: " + str(SAD_bits) + " is the minimum: "))
+elif q.lower() == 'n':
+	pass
+else:
+	print ("Error. Quitting...")
+	quit()
+
 SAD_value_bin = np.binary_repr(SAD_value, width=SAD_bits)
 
 # to show the matrices PA, PB and SAD in the initial comment of the test bench
@@ -173,10 +187,10 @@ architecture struct of tb_SAD is\n\
 	\n\
 	component SAD is\n\
 		generic(\n\
-			Npixel     : positive := " + str(px) + ";      -- total # of pixels of the image\n\
+			Npixel     : positive ;      -- total # of pixels of the image\n\
 			\n\
-			Nbit       : positive := " + str(N) + ";        -- # of bits needed to represent the value of each pixel\n\
-			SAD_bits   : positive := " + str(SAD_bits) + " 	-- # of bits needed to represent the output\n\
+			Nbit       : positive ;        -- # of bits needed to represent the value of each pixel\n\
+			SAD_bits   : positive  	-- # of bits needed to represent the output\n\
 		);\n\
 		port(\n\
 			CLK        : in  std_logic;\n\
@@ -191,7 +205,7 @@ architecture struct of tb_SAD is\n\
 	end component SAD;\n\
 \n\
 \n\
-	constant Npixel  : positive := 16;\n\
+	constant Npixel  : positive := " + str(px**2) + ";\n\
 	constant Nbit    : positive := " + str(N) + ";\n\
 	constant Mbit    : positive := " + str(SAD_bits) + ";\n\
 	constant clk_per : time     := 5 ns;\n\
@@ -334,3 +348,4 @@ if SHOW_PLOT==1:
 	legend()
 	show()
 
+print ("tb_SAD.vhd is updated.")

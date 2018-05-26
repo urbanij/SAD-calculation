@@ -1,23 +1,23 @@
 ---------------------------------------------
--- Title       : reg
+-- Title       : PIPOreg
 -- Project     : Final project: SAD Calculation
 ---------------------------------------------
--- File        : reg.vhd
+-- File        : PIPOreg.vhd
 -- Language    : VHDL
 -- Author(s)   : Francesco Urbani
 -- Company     : 
 -- Created     : Thu May  3 16:00:02 CEST 2018
 ---------------------------------------------
--- Description :
+-- Description : Parallel-in, parallel-out unidirectional shift register
 ---------------------------------------------
--- Update      :
+-- Update      : 
 ---------------------------------------------
 
 library IEEE;
 use IEEE.std_logic_1164.all;
 
 
-entity reg is
+entity PIPOreg is
 	generic (N : positive := 8); -- N BIT PIPO REGISTER
 	port (
 		clk     : in  std_logic;
@@ -25,10 +25,10 @@ entity reg is
 		d       : in  std_logic_vector(N-1 downto 0);
 		q       : out std_logic_vector(N-1 downto 0)
 	);
-end reg;
+end PIPOreg;
 
 
-architecture rtl of reg is
+architecture rtl of PIPOreg is
 
   component dff
 	port (

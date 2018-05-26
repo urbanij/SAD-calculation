@@ -46,7 +46,7 @@ architecture struct of SAD is
 	
 	-- DECLARING COMPONENTS
 
-	component reg is
+	component PIPOreg is
 		generic (N : positive); -- N BIT PIPO REGISTER
 		port (
 			clk     : in  std_logic;
@@ -56,13 +56,14 @@ architecture struct of SAD is
 		);
 	end component;
 
-	component upcounter is
-		generic (Nbit : natural);
+	component counter is
+		generic (
+			overflow_val : natural := 25
+		);
 		port (
 			count_puls   : in std_logic;
 			count_enable : in std_logic;
 			rst          : in std_logic;
-			q            : out std_logic_vector(Nbit-1 downto 0);
 			tc           : out std_logic
 		);
 	end component;
@@ -98,15 +99,6 @@ architecture struct of SAD is
 		) ;
 	end component ;
 
-	component SR_latch is
-		port (
-			S     : in std_logic;
-			R     : in std_logic;
-			Q     : out std_logic;
-			not_Q : out std_logic
-		) ;
-	end component;
-
 	component SISOreg is
 		generic (N  : positive := 3);
 		port (
@@ -124,8 +116,6 @@ architecture struct of SAD is
 	signal padding          : std_logic_vector(SAD_bits-Nbit-1 downto 0); -- turn the input to the subtractor into M bits, i.e. adds M-N bits ahead of PA/PB respectively
 	signal PA_to_sub_nbit   : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the reg on the PA side to the subtractor
 	signal PB_to_sub_nbit   : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the reg on the PB side to the subtractor
-	--signal PA_to_sub_mbit   : std_logic_vector(SAD_bits-1 downto 0); -- turning PA to M bits
-	--signal PB_to_sub_mbit   : std_logic_vector(SAD_bits-1 downto 0); -- turning PB to M bits
 
 	signal sub_to_rca_nbits       : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the subtractor    to one input of the rca
 	signal sub_to_rca_SADbits       : std_logic_vector(SAD_bits-1 downto 0);
@@ -141,25 +131,23 @@ architecture struct of SAD is
 
 	signal sad_wire         : std_logic_vector(SAD_bits-1 downto 0); -- output register output (i.e. the actual SAD signal)
 	signal tc_wire          : std_logic;
-	signal s_latch_wire     : std_logic; -- from AND gate to S of SR latch
 	signal hold_wire        : std_logic; -- from /Q of SR latch to HOLD of output register. This is also DATA_VALID
-	signal sr_q_wire        : std_logic; -- from Q of SR latch to OR. this coincides with DATA_VALID
 
+	--constant total_pixels : positive := Npixel**2;
 
 begin
 	
 	
 	rst_input_registers <= (not RST) nand EN;
-	hold_wire    <= EN        nand (not sr_q_wire);
-	s_latch_wire <= (not RST) and  tc_wire;
+	hold_wire           <= EN        nand (not tc_wire);
 
 
 
-	reg_PA : reg
+	reg_PA : PIPOreg
 		generic map(Nbit)
 		port map (CLK, rst_input_registers, PA, PA_to_sub_nbit);
 
-	reg_PB : reg
+	reg_PB : PIPOreg
 		generic map(Nbit)
 		port map (CLK, rst_input_registers, PB, PB_to_sub_nbit);
 
@@ -178,7 +166,7 @@ begin
 		generic map(SAD_bits)
 		port map(sub_to_rca_SADbits, reg_to_rca, '0', rca_out, open);
 
-	reg_loop: reg
+	reg_loop: PIPOreg
 		generic map(SAD_bits)
 		port map (CLK, RST, rca_out, reg_to_rca);
 
@@ -186,25 +174,21 @@ begin
 		generic map(SAD_bits)
 		port map(rca_out, sad_wire, hold_wire, mux_to_reg_out_wire);
 
-	reg_out: reg
+	reg_out: PIPOreg
 		generic map(SAD_bits)
 		port map (CLK, RST, mux_to_reg_out_wire, sad_wire);
 
 	siso: SISOreg
-		generic map(3)
+		generic map(2)
 		port map(EN, CLK, RST, counter_in);
 
-	cnt: upcounter
-		generic map(8) -- warning: review this  -- [ ceil(log2(px^2)) ?]
-		port map(CLK, counter_in, RST, open, tc_wire);
+	cnt: counter
+		generic map(Npixel)
+		port map(CLK, counter_in, RST, tc_wire);
 
-	sr : SR_latch
-		port map(s_latch_wire, RST, sr_q_wire, open);
-
-	
 	
 	SAD        <= sad_wire;
-	DATA_VALID <= sr_q_wire;
+	DATA_VALID <= tc_wire;
 
 end architecture;
 
