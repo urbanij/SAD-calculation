@@ -1,14 +1,14 @@
 ---------------------------------------------
--- Title       : mux2to1
--- Project     : DDFS
+-- Title       : tb_mux2to1
+-- Project     : Final project: SAD Calculation
 ---------------------------------------------
--- File        : mux2to1.vhd
+-- File        : tb_mux2to1.vhd
 -- Language    : VHDL
--- Author(s)   : francescourbani
+-- Author(s)   : Francesco Urbani
 -- Company     : 
 -- Created     : Wed May 16 20:21:16 CEST 2018
 ---------------------------------------------
--- Description : Mux for DDFS_Q_LUT
+-- Description : 
 ---------------------------------------------
 -- Update      :
 ---------------------------------------------

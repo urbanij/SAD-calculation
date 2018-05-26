@@ -8,22 +8,23 @@
 -- Company     : 
 -- Created     : Sat May 19 23:53:22 CEST 2018
 ---------------------------------------------
--- Description : counter used to check if 2^Nbit cycles have passed. When tc activates DATA_VALID of SAD goes to 1.
+-- Description : Slighly modified counter,
+--               It counts up to overflow_val and when 
+--               that value is reached the output signal tc is set to 1
+--               until a reset (active high) occurs.
 ---------------------------------------------
 -- Update      :
 ---------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all; -- needed for unsigned
+use ieee.numeric_std.all; 
 
 
--- usual counter which counts up to 2^Nbit -1 with
--- an additional output port called tc which becomes 1 if every bit of q is 1.
 entity counter is
 	generic (
-			overflow_val : natural := 25
-		);
+		overflow_val : natural := 25
+	);
 	port (
 		count_puls   : in std_logic;
 		count_enable : in std_logic;
@@ -31,30 +32,6 @@ entity counter is
 		tc           : out std_logic
 	);
 end entity ; -- counter
-
-
---architecture beh of counter is
---	signal internal : unsigned(Nbit-1 downto 0);
-	
---	begin
---		process(count_puls)
---		begin		
---			if (count_puls='1' and count_puls'event) then
---				if (rst = '1') then
---					internal <= (others => '0');
---				elsif (count_enable = '1') then
---					internal <= internal + 1;
---				end if;
-
---			end if;
-
---		end process;
-
---		q  <= std_logic_vector(internal);
---		tc <= '1' when internal = (2**Nbit-1) else '0'; --same way of writing it.
-
---end architecture ; -- beh
-
 
 
 

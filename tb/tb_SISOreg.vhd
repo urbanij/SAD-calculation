@@ -24,8 +24,6 @@ architecture rtl of tb_SISOreg is
 
 	constant N       : positive := 3;
 
-		
-
 	component SISOreg is
 		generic (N  : positive := 3);
 		port (

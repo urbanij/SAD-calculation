@@ -1,10 +1,10 @@
 ---------------------------------------------
 -- Title       : tb_fa
--- Project     : RippleCarryAdder
+-- Project     : Final project: SAD Calculation
 ---------------------------------------------
 -- File        : tb_fa.vhd
 -- Language    : VHDL
--- Author(s)   : francescourbani
+-- Author(s)   : Francesco Urbani
 -- Company     : 
 -- Created     : Tue May 15 20:57:19 CEST 2018
 ---------------------------------------------

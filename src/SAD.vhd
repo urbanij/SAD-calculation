@@ -8,7 +8,7 @@
 -- Company     : 
 -- Created     : Fri May 18 16:23:33 CEST 2018
 ---------------------------------------------
--- Description :
+-- Description : Actual SAD calculator (top level file)
 ---------------------------------------------
 -- Update      :
 ---------------------------------------------
@@ -24,27 +24,24 @@ use ieee.numeric_std.all;
 entity SAD is
 	generic (
 		Npixel     : positive := 16;	-- total # of pixels of the image
-		Nbit       : positive := 8;		-- # of bits needed to represent the value of each pixel
-		
-		SAD_bits    : positive := 16 	    -- # of bits needed to represent the output
+		Nbit       : positive := 8;		-- # bits needed to represent the value of each pixel
+		SAD_bits   : positive := 16 	-- # of bits needed to represent the output
 	);
 	port (
-		CLK        : in  std_logic;	                        -- CLK, active high
+		CLK        : in  std_logic;	                        -- CLK, active on rising edge
 		RST        : in  std_logic;	                        -- RST, active high
 		PA         : in  std_logic_vector(Nbit-1 downto 0);	-- input pixel value image A
 		PB         : in  std_logic_vector(Nbit-1 downto 0);	-- input pixel value image B
-		EN         : in  std_logic;	                        -- EN
-		SAD        : out std_logic_vector(SAD_bits-1 downto 0);	-- ouput SAD
-		DATA_VALID : out std_logic	                        -- specify if the output SAD is valid or not
+		EN         : in  std_logic;	                        -- enable input
+		SAD        : out std_logic_vector(SAD_bits-1 downto 0);	-- ouput SAD value
+		DATA_VALID : out std_logic	                        -- specifies whether the output SAD is valid or not
 	);
 end entity SAD;
 
 
-
-
 architecture struct of SAD is
 	
-	-- DECLARING COMPONENTS
+	-- DECLARING COMPONENTS NEEDED.
 
 	component PIPOreg is
 		generic (N : positive); -- N BIT PIPO REGISTER
@@ -73,7 +70,7 @@ architecture struct of SAD is
 		port (
 			a : in std_logic_vector(Nbit-1 downto 0);
 			b : in std_logic_vector(Nbit-1 downto 0);
-			s : out std_logic_vector(Nbit-1 downto 0) -- sub/difference output
+			s : out std_logic_vector(Nbit-1 downto 0) 
 		);
 	end component;
 	
@@ -113,34 +110,47 @@ architecture struct of SAD is
 
 
 	-- intermediate signals
-	signal padding          : std_logic_vector(SAD_bits-Nbit-1 downto 0); -- turn the input to the subtractor into M bits, i.e. adds M-N bits ahead of PA/PB respectively
-	signal PA_to_sub_nbit   : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the reg on the PA side to the subtractor
-	signal PB_to_sub_nbit   : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the reg on the PB side to the subtractor
+	signal padding               : std_logic_vector(SAD_bits-Nbit-1 downto 0); 
+                                   -- turns the signal out off the subractor to a number of bits 
+                                   -- coherent with the following signals
+	signal PA_to_sub_nbit        : std_logic_vector(Nbit-1 downto 0);          
+                                   -- connection from the out of the reg on the PA side to the subtractor
+	signal PB_to_sub_nbit        : std_logic_vector(Nbit-1 downto 0);          
+                                   -- connection from the out of the reg on the PB side to the subtractor
 
-	signal sub_to_rca_nbits       : std_logic_vector(Nbit-1 downto 0); -- connection from the out of the subtractor    to one input of the rca
-	signal sub_to_rca_SADbits       : std_logic_vector(SAD_bits-1 downto 0);
-	signal reg_to_rca       : std_logic_vector(SAD_bits-1 downto 0); -- connection from the out of the loop register to one input of the rca
+	signal sub_to_rca_nbits      : std_logic_vector(Nbit-1 downto 0); 
+                                   -- signal out of the subtractor
+	signal sub_to_rca_SADbits    : std_logic_vector(SAD_bits-1 downto 0);
+                                   -- signal out of the subtractor with SAD_bits (i.e. zeros on top)
+	signal reg_to_rca            : std_logic_vector(SAD_bits-1 downto 0); 
+                                   -- connection from the out of the loop register to one input of the rca
 
-	signal counter_in  : std_logic;
+	signal counter_in            : std_logic; 
+                                   -- input to the counter enable pin
 
-	signal rca_out          : std_logic_vector(SAD_bits-1 downto 0); -- rca output wire
+	signal rca_out               : std_logic_vector(SAD_bits-1 downto 0); 
+                                   -- rca output wire
 	
 	signal mux_to_reg_out_wire   : std_logic_vector(SAD_bits-1 downto 0);
+                                   -- connection from the multiplex to the output PIPO register
 	
-	signal rst_input_registers : std_logic;
+	signal rst_input_registers   : std_logic;
+                                   -- reset input signal to the heading PIPO registers 
 
-	signal sad_wire         : std_logic_vector(SAD_bits-1 downto 0); -- output register output (i.e. the actual SAD signal)
-	signal tc_wire          : std_logic;
-	signal hold_wire        : std_logic; -- from /Q of SR latch to HOLD of output register. This is also DATA_VALID
+	signal sad_wire              : std_logic_vector(SAD_bits-1 downto 0); 
+                                   -- output-register output (i.e. the actual SAD signal)
+	
+	signal tc_wire               : std_logic; -- output of the counter
+	signal hold_wire             : std_logic; -- input control signal of the output-MUX. This is also DATA_VALID
 
-	--constant total_pixels : positive := Npixel**2;
+
+
 
 begin
 	
 	
 	rst_input_registers <= (not RST) nand EN;
 	hold_wire           <= EN        nand (not tc_wire);
-
 
 
 	reg_PA : PIPOreg
@@ -151,25 +161,35 @@ begin
 		generic map(Nbit)
 		port map (CLK, rst_input_registers, PB, PB_to_sub_nbit);
 
+
+	-- generating a bunch of zeros for the padding signal.
 	gen_padding : for i in 0 to SAD_bits-Nbit-1 generate
 		padding(i) <= '0';
 	end generate;
 
+
+	-- adding ahead of sub_to_rca_SADbits the padding in order to 
+	-- make its length cohereng with the signals next to him.
 	sub_to_rca_SADbits <= padding & sub_to_rca_nbits;
 
-
+	-- subtractor instance
 	sub: subtractor
 		generic map(Nbit)
 		port map(PA_to_sub_nbit, PB_to_sub_nbit, sub_to_rca_nbits);
 
+	-- ripple carry adder instance
 	add: rca
 		generic map(SAD_bits)
 		port map(sub_to_rca_SADbits, reg_to_rca, '0', rca_out, open);
 
+	-- PIPO register on the loop side
 	reg_loop: PIPOreg
 		generic map(SAD_bits)
 		port map (CLK, RST, rca_out, reg_to_rca);
 
+
+	-- multiplexer on the output register side. 
+	-- Needed to freeze the SAD signal when ENABLE is 0 and when the SAD computation is completed.
 	mux1 : mux2to1
 		generic map(SAD_bits)
 		port map(rca_out, sad_wire, hold_wire, mux_to_reg_out_wire);
@@ -178,85 +198,24 @@ begin
 		generic map(SAD_bits)
 		port map (CLK, RST, mux_to_reg_out_wire, sad_wire);
 
+
+	-- SISO register made of 2 D flip-flops. 
+	-- Needed to delay the ENABLE signal going into the COUNT_ENABLE of the counter.
+	-- This was necessary in order to sync the upper path of the SAD calculation
+	-- and the COUNTER.
 	siso: SISOreg
 		generic map(2)
 		port map(EN, CLK, RST, counter_in);
 
+	-- counter. it counts up to Npixel * Npixel, after that it sets its output to 1,
+	-- hence the DATA_VALID signal of the system is high and the SAD value is freezed.
 	cnt: counter
 		generic map(Npixel)
 		port map(CLK, counter_in, RST, tc_wire);
 
 	
+	-- connection of the intermediate signals to the output of the SAD.
 	SAD        <= sad_wire;
 	DATA_VALID <= tc_wire;
 
 end architecture;
-
-
-
-
---architecture beh of SAD is
-
---	signal sumdiffs : std_logic_vector (M-1 downto 0);	-- it mantains the sum of all the absolute differences until now, starting from the RST
---	signal op_count : integer;	-- it counts the number of operations performed until now, starting from the RST
---	constant zeros : std_logic_vector(M-N-1 downto 0) := (others => '0'); -- constant string of 0s; it is used to extend the inputs
-	
---	begin
---		SAD_calc : process (CLK, RST)  
---		-- internal variables
---		variable extPA : std_logic_vector(M-1 downto 0);	-- it adapts the input 'PA' to the output length
---		variable extPB : std_logic_vector(M-1 downto 0);	-- it adapts the input 'PB' to the output length
---		variable diff : std_logic_vector(M-1 downto 0);		-- it keeps the difference between 'PA' and 'PB' 
---			begin
---				-- RST event; it clears the output vars and the internal ones
---				if (RST = '1') then
---					DATA_VALID <= '0';
---					op_count <= 0;
---					extPA := (others => '0');
---					extPB := (others => '0');
---					diff := (others => '0');
---					sumdiffs <= (others => '0');
---				-- CLK positive edge; perform the computation
---				elsif(CLK = '1' and CLK'event) then
---					--DATA_VALID <= '0';
---					-- it checks the 'EN' input; it skips all the operations if the latter is equal to 0
---					if(EN = '1') then
---						-- SAD computation is finished; it sets 'DATA_VALID' to 1	
-						
-
---						extPA := zeros & PA;
---						extPB := zeros & PB;
-
---						if unsigned(extPa) >= unsigned(extPb) then
---							diff := std_logic_vector( unsigned(extPA) - unsigned(extPB) );
---						else
---							diff := std_logic_vector( unsigned(extPB) - unsigned(extPA) );
---						end if;
-
---						-- it computes the difference between the extended inputs
---						-- diff := std_logic_vector(unsigned(extPA) - unsigned(extPB));
---						-- it checks if the result is positive or not, and performs the abs eventually
---						-- negative result; it changes the sign of the difference
---						-- if(diff(8) = '1') then
---						-- diff := std_logic_vector(-(signed(diff)));
---						-- end if;
---						-- it adds the current difference to the ones computed until now
-
---						if(op_count + 1 >= Npixel) then
---							DATA_VALID <= '1';
---							sumdiffs <= std_logic_vector( unsigned(sumdiffs) );
---						else
---							sumdiffs <= std_logic_vector( unsigned(sumdiffs) + unsigned(diff) );
---						end if;
-
-						
---						-- it increments the 'op_cont' and set the output
---						op_count <= op_count + 1;
---					end if;
---				end if;
---			end process;
---			SAD <= sumdiffs;
---end beh;
-
-
-

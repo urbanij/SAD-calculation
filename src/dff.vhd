@@ -8,7 +8,7 @@
 -- Company     : 
 -- Created     : Thu May  3 16:00:02 CEST 2018
 ---------------------------------------------
--- Description :
+-- Description : D flip-flop
 ---------------------------------------------
 -- Update      :
 ---------------------------------------------
@@ -36,7 +36,7 @@ begin
         begin
             if rst='1' then 
                 q <= '0';
-            elsif (clk='1' and clk'event) then -- rising_edge(clk) eqiv to (clk='1' and clk'event)
+            elsif (clk='1' and clk'event) then
                 q <= d;
             end if;
         end process dff_p;
