@@ -53,10 +53,19 @@ architecture struct of SAD is
 		);
 	end component;
 
-	component counter is
-		generic (
-			overflow_val : natural := 25
+	component PhaseAccumulator is
+		generic (N : positive );
+		port(
+			clk    : in  std_logic;
+			rst    : in  std_logic;
+			pa_in  : in  std_logic_vector(N-1 downto 0);
+			pa_out : out std_logic_vector(N-1 downto 0)
 		);
+	end component;
+
+
+	component counter is
+		generic ( overflow_val : natural );
 		port (
 			count_puls   : in std_logic;
 			count_enable : in std_logic;
@@ -68,36 +77,25 @@ architecture struct of SAD is
 	component subtractor is
 		generic (Nbit : positive);
 		port (
-			a : in std_logic_vector(Nbit-1 downto 0);
-			b : in std_logic_vector(Nbit-1 downto 0);
+			a : in  std_logic_vector(Nbit-1 downto 0);
+			b : in  std_logic_vector(Nbit-1 downto 0);
 			s : out std_logic_vector(Nbit-1 downto 0) 
 		);
 	end component;
-	
-	component rca is
-		generic (N : positive);
-		port (
-			x   : in  std_logic_vector(N -1 downto 0);
-			y   : in  std_logic_vector(N -1 downto 0);
-			c0  : in  std_logic;
 
-			s   : out std_logic_vector(N -1 downto 0);
-			cn  : out std_logic
-		) ;
-	end component;
 
 	component mux2to1 is
 		generic (Nbit : in positive );
 		port (
-			i0   : in std_logic_vector(Nbit-1 downto 0);
-			i1   : in std_logic_vector(Nbit-1 downto 0);
-			s    : in std_logic;
+			i0   : in  std_logic_vector(Nbit-1 downto 0);
+			i1   : in  std_logic_vector(Nbit-1 downto 0);
+			s    : in  std_logic;
 			f    : out std_logic_vector(Nbit-1 downto 0)
 		) ;
 	end component ;
 
 	component SISOreg is
-		generic (N  : positive := 3);
+		generic (N  : positive );
 		port (
 			SI   : in std_logic;
 			clk  : in std_logic;
@@ -118,18 +116,16 @@ architecture struct of SAD is
 	signal PB_to_sub_nbit        : std_logic_vector(Nbit-1 downto 0);          
                                    -- connection from the out of the reg on the PB side to the subtractor
 
-	signal sub_to_rca_nbits      : std_logic_vector(Nbit-1 downto 0); 
-                                   -- signal out of the subtractor
-	signal sub_to_rca_SADbits    : std_logic_vector(SAD_bits-1 downto 0);
-                                   -- signal out of the subtractor with SAD_bits (i.e. zeros on top)
-	signal reg_to_rca            : std_logic_vector(SAD_bits-1 downto 0); 
-                                   -- connection from the out of the loop register to one input of the rca
-
+	signal sub_out_nbits         : std_logic_vector(Nbit-1 downto 0); 
+                                   -- signal out of the subtractor (Nbit)
+	signal pa_in                 : std_logic_vector(SAD_bits-1 downto 0);
+                                   -- input to the phase accumulator
+	
 	signal counter_in            : std_logic; 
                                    -- input to the counter enable pin
 
-	signal rca_out               : std_logic_vector(SAD_bits-1 downto 0); 
-                                   -- rca output wire
+	signal pa_out                : std_logic_vector(SAD_bits-1 downto 0); 
+                                   -- phase accumulator output wire
 	
 	signal mux_to_reg_out_wire   : std_logic_vector(SAD_bits-1 downto 0);
                                    -- connection from the multiplex to the output PIPO register
@@ -145,12 +141,10 @@ architecture struct of SAD is
 
 
 
-
 begin
-	
-	
-	rst_input_registers <= (not RST) nand EN;
-	hold_wire           <= EN        nand (not tc_wire);
+		
+	rst_input_registers <= EN nand (not RST);
+	hold_wire           <= EN nand (not tc_wire);
 
 
 	reg_PA : PIPOreg
@@ -168,31 +162,25 @@ begin
 	end generate;
 
 
-	-- adding ahead of sub_to_rca_SADbits the padding in order to 
+	-- adding ahead of pa_in the padding in order to 
 	-- make its length cohereng with the signals next to him.
-	sub_to_rca_SADbits <= padding & sub_to_rca_nbits;
+	pa_in <= padding & sub_out_nbits;
 
 	-- subtractor instance
 	sub: subtractor
 		generic map(Nbit)
-		port map(PA_to_sub_nbit, PB_to_sub_nbit, sub_to_rca_nbits);
+		port map(PA_to_sub_nbit, PB_to_sub_nbit, sub_out_nbits);
 
-	-- ripple carry adder instance
-	add: rca
+	phaseacc: PhaseAccumulator
 		generic map(SAD_bits)
-		port map(sub_to_rca_SADbits, reg_to_rca, '0', rca_out, open);
-
-	-- PIPO register on the loop side
-	reg_loop: PIPOreg
-		generic map(SAD_bits)
-		port map (CLK, RST, rca_out, reg_to_rca);
+		port map(CLK, RST, pa_in, pa_out);
 
 
 	-- multiplexer on the output register side. 
 	-- Needed to freeze the SAD signal when ENABLE is 0 and when the SAD computation is completed.
 	mux1 : mux2to1
 		generic map(SAD_bits)
-		port map(rca_out, sad_wire, hold_wire, mux_to_reg_out_wire);
+		port map(pa_out, sad_wire, hold_wire, mux_to_reg_out_wire);
 
 	reg_out: PIPOreg
 		generic map(SAD_bits)
@@ -204,7 +192,7 @@ begin
 	-- This was necessary in order to sync the upper path of the SAD calculation
 	-- and the COUNTER.
 	siso: SISOreg
-		generic map(2)
+		generic map(3)
 		port map(EN, CLK, RST, counter_in);
 
 	-- counter. it counts up to Npixel * Npixel, after that it sets its output to 1,

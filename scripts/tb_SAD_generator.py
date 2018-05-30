@@ -19,7 +19,6 @@ Created on Fri May 18 15:41:14 CEST 2018
 """
 
 import sys
-# import os
 import time
 import numpy as np
 from pylab import *
@@ -53,8 +52,6 @@ try:
 		if N < 1 or px < 1:
 			print ("Aborting...")
 			quit()	
-		else:
-			print ("tb_SAD.vhd updated.")
 	else:
 		print ("Aborting...")
 		quit()
@@ -86,7 +83,7 @@ SAD_sequence = np.array(SAD_sequence)
 # print (SAD_sequence)
 
 SAD = SAD_sequence.reshape((px,px))
-print (SAD)
+# print (SAD)
 
 # sum the values into SAD_array alltogether
 SAD_value = np.sum(DIFF_array)
@@ -99,7 +96,7 @@ print ("SAD value = %d" %SAD_value)
 SAD_bits = int(np.ceil(np.log2((2**N-1) * px**2 ))) # minimum number of bit to correctly represent the SAD value
 print ("Min num bits to represent correctly the SAD value = " + str(SAD_bits))
 
-q = input("Do you want to change the number of bits of SAD value? [y/n]")
+q = input("Do you want to change the number of bits of SAD value? [y/n]: ")
 if q.lower() == 'y':
 	SAD_bits = int(input("Insert number of bits to represent the SAD value.\nNote: " + str(SAD_bits) + " is the minimum: "))
 elif q.lower() == 'n':

@@ -61,9 +61,12 @@ architecture struct of SAD_wrapper is
 
 	signal clk : std_logic;
 	signal rst : std_logic;
-	signal pa_ext : std_logic_vector(N-1 downto 0);	
-	signal pb_ext : std_logic_vector(N-1 downto 0);	
+	signal pa : std_logic_vector(N-1 downto 0);	
+	signal pb : std_logic_vector(N-1 downto 0);	
 	signal en : std_logic;
+	signal sad_out : std_logic_vector(M-1 downto 0);
+	signal DATA_VALID: std_logic;
+
 
 	constant px : integer := 256;
 	constant N  : integer := 8;
@@ -74,8 +77,7 @@ begin
 
 	SAD_wr : SAD
 		generic map(px, N, M)
-		port map(clk, rst, pa_ext, pb_ext, en, open, open);
-	
+		port map(clk, rst, pa, pb, en, sad_out, DATA_VALID);
 	
 	
 end architecture;

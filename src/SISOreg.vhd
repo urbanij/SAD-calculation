@@ -42,18 +42,18 @@ architecture arch of SISOreg is
     end component;
 	
 
-	signal link_wire : std_logic_vector(N downto 0);
+	signal wire : std_logic_vector(N downto 0); -- intermediate wire
 
 
 begin
 
-	link_wire(0) <= SI;
+	wire(0) <= SI;
 
 	SISOgen: for i in 0 to N-1 generate
 		i_dff : dff
-			port map(clk, rst, link_wire(i), link_wire(i+1) );
+			port map(clk, rst, wire(i), wire(i+1) );
 	end generate SISOgen;
 
-	SO <= link_wire(N);
+	SO <= wire(N);
 
 end architecture ; -- arch
