@@ -27,11 +27,11 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 
-entity tb2_SAD is 
-end tb2_SAD;
+entity tb2_SAD_notmine is 
+end tb2_SAD_notmine;
 
 
-architecture beh of tb2_SAD is
+architecture beh of tb2_SAD_notmine is
 
 	component SAD is
 		generic (

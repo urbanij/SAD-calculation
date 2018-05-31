@@ -1,3 +1,5 @@
 .DS_Store
 .work/
 
+tb/tb_SAD.vhd
+waveforms/tb_SAD.vcd

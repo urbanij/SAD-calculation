@@ -23,9 +23,9 @@ use ieee.numeric_std.all;
 
 entity SAD is
 	generic (
-		Npixel     : positive := 16;	-- total # of pixels of the image
-		Nbit       : positive := 8;		-- # bits needed to represent the value of each pixel
-		SAD_bits   : positive := 16 	-- # of bits needed to represent the output
+		Npixel     :     positive := 16;                    -- total # of pixels of the image
+		Nbit       :     positive := 8;                     -- # bits needed to represent the value of each pixel
+		SAD_bits   :     positive := 16                     -- # of bits needed to represent the output
 	);
 	port (
 		CLK        : in  std_logic;	                        -- CLK, active on rising edge
@@ -33,6 +33,7 @@ entity SAD is
 		PA         : in  std_logic_vector(Nbit-1 downto 0);	-- input pixel value image A
 		PB         : in  std_logic_vector(Nbit-1 downto 0);	-- input pixel value image B
 		EN         : in  std_logic;	                        -- enable input
+
 		SAD        : out std_logic_vector(SAD_bits-1 downto 0);	-- ouput SAD value
 		DATA_VALID : out std_logic	                        -- specifies whether the output SAD is valid or not
 	);
@@ -107,6 +108,8 @@ architecture struct of SAD is
 
 
 
+
+
 	-- intermediate signals
 	signal padding               : std_logic_vector(SAD_bits-Nbit-1 downto 0); 
                                    -- turns the signal out off the subractor to a number of bits 
@@ -138,6 +141,8 @@ architecture struct of SAD is
 	
 	signal tc_wire               : std_logic; -- output of the counter
 	signal hold_wire             : std_logic; -- input control signal of the output-MUX. This is also DATA_VALID
+
+
 
 
 

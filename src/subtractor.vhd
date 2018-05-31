@@ -8,7 +8,7 @@
 -- Company     : 
 -- Created     : Sun May 20 22:55:03 CEST 2018
 ---------------------------------------------
--- Description : Nbit subtractor (absolute value)
+-- Description : Nbit (absolute value) subtractor
 ---------------------------------------------
 -- Update      :
 ---------------------------------------------
@@ -22,8 +22,8 @@ use ieee.numeric_std.all;
 entity subtractor is
 	generic (Nbit : positive := 16);
 	port (
-		a : in std_logic_vector(Nbit-1 downto 0);
-		b : in std_logic_vector(Nbit-1 downto 0);
+		a : in  std_logic_vector(Nbit-1 downto 0);
+		b : in  std_logic_vector(Nbit-1 downto 0);
 		s : out std_logic_vector(Nbit-1 downto 0) -- sub/difference output
 	);
 end entity ; -- subtractor
@@ -41,4 +41,3 @@ architecture beh of subtractor is
 		end process;
 
 end architecture ; -- beh
-

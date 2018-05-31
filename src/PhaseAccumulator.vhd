@@ -4,7 +4,7 @@
 ---------------------------------------------
 -- File        : PhaseAccumulator.vhd
 -- Language    : VHDL
--- Author(s)   : francescourbani
+-- Author(s)   : Francesco Urbani
 -- Company     : 
 -- Created     : Thu May  3 15:50:48 2018
 ---------------------------------------------

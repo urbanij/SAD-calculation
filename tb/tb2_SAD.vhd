@@ -16,7 +16,6 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
---use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 
 
@@ -26,24 +25,26 @@ end entity tb2_SAD; -- tb2_SAD
 
 architecture struct of tb2_SAD is
 	
+
 	component SAD is
-		generic(
-			Npixel     : positive ;      -- total # of pixels of the image
-			
-			Nbit       : positive ;        -- # of bits needed to represent the value of each pixel
-			SAD_bits   : positive  	-- # of bits needed to represent the output
+		generic (
+			Npixel     :     positive := 16;                    -- total # of pixels of the image
+			Nbit       :     positive := 8;                     -- # bits needed to represent the value of each pixel
+			SAD_bits   :     positive := 16                     -- # of bits needed to represent the output
 		);
-		port(
-			CLK        : in  std_logic;
-			RST        : in  std_logic;
-			EN         : in  std_logic;
-			PA         : in  std_logic_vector(Nbit-1  downto 0);
-			PB         : in  std_logic_vector(Nbit-1  downto 0);
-			
-			SAD        : out std_logic_vector(SAD_bits-1 downto 0); 
-			DATA_VALID : out std_logic
+		port (
+			CLK        : in  std_logic;	                        -- CLK, active on rising edge
+			RST        : in  std_logic;	                        -- RST, active high
+			EN         : in  std_logic;	                        -- enable input
+			PA         : in  std_logic_vector(Nbit-1 downto 0);	-- input pixel value image A
+			PB         : in  std_logic_vector(Nbit-1 downto 0);	-- input pixel value image B
+
+			SAD        : out std_logic_vector(SAD_bits-1 downto 0);	-- ouput SAD value
+			DATA_VALID : out std_logic	                        -- specifies whether the output SAD is valid or not
 		);
 	end component SAD;
+
+
 
 
 	constant Npixel  : positive := 256;
@@ -53,9 +54,9 @@ architecture struct of tb2_SAD is
 
 	signal clk       : std_logic := '0';
 	signal reset     : std_logic ;
-	signal enable    : std_logic ;
-	signal PA        : std_logic_vector(Nbit-1 downto 0) := "00000000";
-	signal PB        : std_logic_vector(Nbit-1 downto 0) := "XXXXXXXX";
+	signal enable    : std_logic := '1';
+	signal PA        : std_logic_vector(Nbit-1 downto 0);
+	signal PB        : std_logic_vector(Nbit-1 downto 0); 
 	
 	signal testing   : Boolean   := True;
 
@@ -73,10 +74,11 @@ begin
 
 	drive_p: process
 	  	begin
+	  		wait for 2 ns;
 			
 			
-			PA <= x"00";
-			PB <= x"01";
+			PA <= x"0A";
+			PB <= x"05";
 		
 			----------------------------------
 
@@ -89,6 +91,8 @@ begin
 	  	
 	  	drive_rst: process
 	  	begin
+	  		wait for 41 ns;
+	  		wait until rising_edge(clk);
 	  		reset <= '0';
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
@@ -96,13 +100,15 @@ begin
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
+	  		wait until rising_edge(clk);
+	  		wait for 6 ns;
 	  		reset <= '1';
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		reset <= '0';
-	  		wait for 1500 ns;
+	  		wait for 1700 ns;
 	  		reset <= '1';
 	  		wait for 330 ns;
 	  		reset <= '0';
@@ -124,12 +130,9 @@ begin
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
-	  		enable <= '0';
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		
-	  		
-	  		enable <= '1';
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 

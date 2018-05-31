@@ -4,7 +4,7 @@
 ---------------------------------------------
 -- File        : rca.vhd
 -- Language    : VHDL
--- Author(s)   : francescourbani
+-- Author(s)   : Francesco Urbani
 -- Company     : 
 -- Created     : Sat May  5 18:52:03 CEST 2018
 ---------------------------------------------

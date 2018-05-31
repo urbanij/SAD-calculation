@@ -10,7 +10,8 @@
 ---------------------------------------------
 -- Description : Slighly modified counter,
 --               It counts up to overflow_val and when 
---               that value is reached the output signal tc is set to 1
+--               that value is reached the output 
+--               signal tc is set to 1
 --               until a reset (active high) occurs.
 ---------------------------------------------
 -- Update      :
@@ -48,8 +49,8 @@ begin
 				tc <= '0';
 			elsif (count_enable = '1') then
 				count := count + 1;
-				--tc <= '0'; -- comment this out in order to leave tc set to 1 until a reset occurs!
-				             -- otherwhise tc only pulses for a clock cycle.
+				-- tc <= '0'; -- comment this out in order to leave tc set to 1 until a reset occurs!
+				              -- otherwhise tc only pulses for a clock cycle.
 			end if;
 
 			if count=overflow_val then
