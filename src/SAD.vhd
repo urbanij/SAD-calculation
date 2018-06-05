@@ -144,7 +144,8 @@ architecture struct of SAD is
 	signal tc_wire               : std_logic; -- output of the counter
 	signal hold_wire             : std_logic; -- input to the MUX control signal. 
 	                                          -- it also coincides with DATA_VALID
-
+	
+	constant counter_of_value    : positive := Npixel+3; -- counter overflow value
 
 
 
@@ -196,21 +197,12 @@ begin
 		port map (CLK, RST, mux_to_reg_out_wire, sad_wire);
 
 
-	-- SISO register made of 3 D flip-flops. 
-	-- Needed to delay the ENABLE signal going into the COUNT_ENABLE of the counter.
-	-- This was necessary in order to sync the upper path of the SAD calculation
-	-- and the COUNTER.
-	siso: SISOreg
-		generic map(3)
-		port map(EN, CLK, RST, counter_in);
-
-
 	-- counter instance
-	-- it counts up to Npixel * Npixel, after that it sets its output to 1,
+	-- it counts up to counter_of_value, after that it sets its output to 1,
 	-- hence the DATA_VALID signal of the system is high and the SAD value is frozen.
 	cnt: counter
-		generic map(Npixel)
-		port map(CLK, counter_in, RST, tc_wire);
+		generic map(counter_of_value)
+		port map(CLK, EN, RST, tc_wire);
 
 	
 	-- connection of the intermediate signals to the output of the SAD.
