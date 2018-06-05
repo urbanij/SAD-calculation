@@ -24,8 +24,8 @@ import numpy as np
 from pylab import *
 
 def insert_N_and_px():
-	N =int(input("N  = "))
-	px=int(input("px = "))
+	N =int(input(">>> N  = "))
+	px=int(input(">>> px = "))
 	return N, px
 
 

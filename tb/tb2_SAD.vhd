@@ -45,8 +45,6 @@ architecture struct of tb2_SAD is
 	end component SAD;
 
 
-
-
 	constant Npixel  : positive := 256;
 	constant Nbit    : positive := 8;
 	constant Mbit    : positive := 16;
@@ -74,15 +72,12 @@ begin
 
 	drive_p: process
 	  	begin
-	  		wait for 2 ns;
+	  		wait for 12 ns;
 			
 			
-			PA <= x"0A";
-			PB <= x"05";
+			PA <= x"01";
+			PB <= x"00";
 		
-			----------------------------------
-
-
 	  		wait for 7330 ns;
 	  		testing <= False;
 	  		wait;
@@ -91,7 +86,7 @@ begin
 	  	
 	  	drive_rst: process
 	  	begin
-	  		wait for 41 ns;
+	  		wait for 211 ns;
 	  		wait until rising_edge(clk);
 	  		reset <= '0';
 	  		wait until rising_edge(clk);
@@ -101,14 +96,14 @@ begin
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
-	  		wait for 6 ns;
+	  		wait for 66 ns;
 	  		reset <= '1';
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		wait until rising_edge(clk);
 	  		reset <= '0';
-	  		wait for 1700 ns;
+	  		wait for 2200 ns;
 	  		reset <= '1';
 	  		wait for 330 ns;
 	  		reset <= '0';
@@ -119,37 +114,6 @@ begin
 	  		wait for 3000 ns;
 
 	  		wait;
-	  	end process;
-
-
-
-	  	drive_en : process
-	  	begin
-	  		enable <= '1';
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		
-	  		wait for 3000 ns;
-	  		enable <= '0';
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		wait until rising_edge(clk);
-	  		enable <= '1';
-	  		wait for 2400 ns;
 	  	end process;
 
 end architecture;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1527412469">
-  <File Type="PLACE-DCP" Name="SAD_placed.dcp"/>
-  <File Type="PA-DCP" Name="SAD.dcp"/>
+<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1527846510">
+  <File Type="PWROPT-DRC" Name="SAD_drc_pwropted.rpt"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="SAD_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="SAD_timing_summary_init.rpt"/>
   <File Type="ROUTE-PWR-RPX" Name="SAD_power_routed.rpx"/>
@@ -12,8 +11,8 @@
   <File Type="OPT-DRC" Name="SAD_drc_opted.rpt"/>
   <File Type="OPT-TIMING" Name="SAD_timing_summary_opted.rpt"/>
   <File Type="PWROPT-DCP" Name="SAD_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="SAD_drc_pwropted.rpt"/>
   <File Type="PWROPT-TIMING" Name="SAD_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="SAD_placed.dcp"/>
   <File Type="PLACE-IO" Name="SAD_io_placed.rpt"/>
   <File Type="PLACE-CLK" Name="SAD_clock_utilization_placed.rpt"/>
   <File Type="PLACE-UTIL" Name="SAD_utilization_placed.rpt"/>
@@ -63,25 +62,13 @@
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PPRDIR/../../src/fa.vhd">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PPRDIR/../../src/dff.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../src/subtractor.vhd">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../../src/SISOreg.vhd">
+    <File Path="$PPRDIR/../../src/fa.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -99,13 +86,31 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../../src/mux2to1.vhd">
+    <File Path="$PPRDIR/../../src/SISOreg.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../../src/counter.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../src/mux2to1.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../src/PhaseAccumulator.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../../src/subtractor.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -125,14 +130,14 @@
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
     <Filter Type="Constrs"/>
-    <File Path="$PSRCDIR/constrs_1/new/CLK_125.xdc">
+    <File Path="$PSRCDIR/constrs_1/new/clk_2n.xdc">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
       </FileInfo>
     </File>
     <Config>
-      <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/CLK_125.xdc"/>
+      <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/clk_2n.xdc"/>
       <Option Name="ConstrsType" Val="XDC"/>
     </Config>
   </FileSet>

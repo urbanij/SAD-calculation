@@ -8,7 +8,7 @@
 -- Company     : 
 -- Created     : Fri May 18 16:23:33 CEST 2018
 ---------------------------------------------
--- Description : Actual SAD calculator (top level file)
+-- Description : Actual SAD calculator (top level)
 ---------------------------------------------
 -- Update      :
 ---------------------------------------------
@@ -45,7 +45,7 @@ architecture struct of SAD is
 	-- DECLARING COMPONENTS NEEDED.
 
 	component PIPOreg is
-		generic (N : positive); -- N BIT PIPO REGISTER
+		generic (N : positive); -- N BITS PIPO REGISTER
 		port (
 			clk     : in  std_logic;
 			rst     : in  std_logic;
@@ -109,18 +109,20 @@ architecture struct of SAD is
 
 
 
-
 	-- intermediate signals
 	signal padding               : std_logic_vector(SAD_bits-Nbit-1 downto 0); 
                                    -- turns the signal out off the subractor to a number of bits 
-                                   -- coherent with the following signals
+                                   -- coherent with the downstream signal
+
 	signal PA_to_sub_nbit        : std_logic_vector(Nbit-1 downto 0);          
                                    -- connection from the out of the reg on the PA side to the subtractor
+
 	signal PB_to_sub_nbit        : std_logic_vector(Nbit-1 downto 0);          
                                    -- connection from the out of the reg on the PB side to the subtractor
 
 	signal sub_out_nbits         : std_logic_vector(Nbit-1 downto 0); 
                                    -- signal out of the subtractor (Nbit)
+
 	signal pa_in                 : std_logic_vector(SAD_bits-1 downto 0);
                                    -- input to the phase accumulator
 	
@@ -134,13 +136,14 @@ architecture struct of SAD is
                                    -- connection from the multiplex to the output PIPO register
 	
 	signal rst_input_registers   : std_logic;
-                                   -- reset input signal to the heading PIPO registers 
+                                   -- reset input signal to the two heading PIPO registers
 
 	signal sad_wire              : std_logic_vector(SAD_bits-1 downto 0); 
                                    -- output-register output (i.e. the actual SAD signal)
 	
 	signal tc_wire               : std_logic; -- output of the counter
-	signal hold_wire             : std_logic; -- input control signal of the output-MUX. This is also DATA_VALID
+	signal hold_wire             : std_logic; -- input to the MUX control signal. 
+	                                          -- it also coincides with DATA_VALID
 
 
 
@@ -152,6 +155,7 @@ begin
 	hold_wire           <= EN nand (not tc_wire);
 
 
+
 	reg_PA : PIPOreg
 		generic map(Nbit)
 		port map (CLK, rst_input_registers, PA, PA_to_sub_nbit);
@@ -161,14 +165,14 @@ begin
 		port map (CLK, rst_input_registers, PB, PB_to_sub_nbit);
 
 
-	-- generating a bunch of zeros for the padding signal.
+	-- generating a bunch of zeros to make the padding.
 	gen_padding : for i in 0 to SAD_bits-Nbit-1 generate
 		padding(i) <= '0';
 	end generate;
 
 
-	-- adding ahead of pa_in the padding in order to 
-	-- make its length cohereng with the signals next to him.
+	-- merging padding and sub_out_nbits to make a new signal called pa_in
+	-- which enters the phase accumlator
 	pa_in <= padding & sub_out_nbits;
 
 	-- subtractor instance
@@ -192,7 +196,7 @@ begin
 		port map (CLK, RST, mux_to_reg_out_wire, sad_wire);
 
 
-	-- SISO register made of 2 D flip-flops. 
+	-- SISO register made of 3 D flip-flops. 
 	-- Needed to delay the ENABLE signal going into the COUNT_ENABLE of the counter.
 	-- This was necessary in order to sync the upper path of the SAD calculation
 	-- and the COUNTER.
@@ -200,8 +204,10 @@ begin
 		generic map(3)
 		port map(EN, CLK, RST, counter_in);
 
-	-- counter. it counts up to Npixel * Npixel, after that it sets its output to 1,
-	-- hence the DATA_VALID signal of the system is high and the SAD value is freezed.
+
+	-- counter instance
+	-- it counts up to Npixel * Npixel, after that it sets its output to 1,
+	-- hence the DATA_VALID signal of the system is high and the SAD value is frozen.
 	cnt: counter
 		generic map(Npixel)
 		port map(CLK, counter_in, RST, tc_wire);
@@ -211,4 +217,7 @@ begin
 	SAD        <= sad_wire;
 	DATA_VALID <= tc_wire;
 
+
 end architecture;
+
+

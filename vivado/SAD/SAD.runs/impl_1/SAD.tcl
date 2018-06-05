@@ -44,19 +44,20 @@ proc step_failed { step } {
 
 set_msg_config -id {HDL 9-1061} -limit 100000
 set_msg_config -id {HDL 9-1654} -limit 100000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 
 start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  reset_param project.defaultXPMLibraries 
-  open_checkpoint C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.runs/impl_1/SAD.dcp
-  set_property webtalk.parent_dir C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.cache/wt [current_project]
-  set_property parent.project_path C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.xpr [current_project]
-  set_property ip_output_repo C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.cache/ip [current_project]
+  set_property design_mode GateLvl [current_fileset]
+  set_param project.singleFileAddWarning.threshold 0
+  set_property webtalk.parent_dir C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.cache/wt [current_project]
+  set_property parent.project_path C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.xpr [current_project]
+  set_property ip_output_repo C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
+  add_files -quiet C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.runs/synth_1/SAD.dcp
+  read_xdc C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.srcs/constrs_1/new/clk_2n.xdc
+  link_design -top SAD -part xc7z010clg400-1
   write_hwdef -file SAD.hwdef
   close_msg_db -file init_design.pb
 } RESULT]

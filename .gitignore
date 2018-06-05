@@ -1,5 +1,11 @@
 .DS_Store
 .work/
 
-tb/tb_SAD.vhd
-waveforms/tb_SAD.vcd
+# tb/tb_SAD.vhd
+# waveforms/tb_SAD.vcd
+
+*.aux
+*.lof
+*.gz
+*.log
+*.toc

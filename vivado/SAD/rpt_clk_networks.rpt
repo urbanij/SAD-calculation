@@ -1,0 +1,20 @@
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
+| Date         : Fri Jun 01 12:46:39 2018
+| Host         : fu-Win10 running 64-bit major release  (build 9200)
+| Command      : report_clock_networks -file rpt_clk_networks.rpt
+| Design       : SAD
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+------------------------------------------------------------------------------------
+
+Clock Networks Report
+
+
+Constrained Clocks
+-------------------
+
+Clock clk_6ns (166.667MHz)(endpoints: 83 clock, 0 nonclock)
+Port CLK
+

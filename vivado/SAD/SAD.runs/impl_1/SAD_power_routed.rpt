@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-| Date             : Sun May 27 11:15:16 2018
+| Date             : Fri Jun 01 11:49:52 2018
 | Host             : fu-Win10 running 64-bit major release  (build 9200)
 | Command          : report_power -file SAD_power_routed.rpt -pb SAD_power_summary_routed.pb -rpx SAD_power_routed.rpx
 | Design           : SAD
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.107 |
-| Dynamic (W)              | 0.005 |
+| Total On-Chip Power (W)  | 0.109 |
+| Dynamic (W)              | 0.007 |
 | Device Static (W)        | 0.102 |
 | Effective TJA (C/W)      | 11.5  |
-| Max Ambient (C)          | 83.8  |
-| Junction Temperature (C) | 26.2  |
+| Max Ambient (C)          | 83.7  |
+| Junction Temperature (C) | 26.3  |
 | Confidence Level         | Low   |
 | Setting File             | ---   |
 | Simulation Activity File | ---   |
@@ -49,16 +49,16 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      217 |       --- |             --- |
+| Clocks         |     0.001 |        3 |       --- |             --- |
+| Slice Logic    |    <0.001 |      219 |       --- |             --- |
 |   LUT as Logic |    <0.001 |       56 |     17600 |            0.32 |
-|   Register     |    <0.001 |       82 |     35200 |            0.23 |
+|   Register     |    <0.001 |       83 |     35200 |            0.24 |
 |   CARRY4       |    <0.001 |       11 |      4400 |            0.25 |
-|   Others       |     0.000 |       38 |       --- |             --- |
-| Signals        |    <0.001 |      182 |       --- |             --- |
-| I/O            |     0.003 |       36 |       100 |           36.00 |
+|   Others       |     0.000 |       39 |       --- |             --- |
+| Signals        |    <0.001 |      167 |       --- |             --- |
+| I/O            |     0.004 |       36 |       100 |           36.00 |
 | Static Power   |     0.102 |          |           |                 |
-| Total          |     0.107 |          |           |                 |
+| Total          |     0.109 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -68,11 +68,11 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.006 |       0.002 |      0.004 |
+| Vccint    |       1.000 |     0.007 |       0.003 |      0.004 |
 | Vccaux    |       1.800 |     0.011 |       0.000 |      0.011 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
-| Vcco18    |       1.800 |     0.002 |       0.001 |      0.001 |
+| Vcco18    |       1.800 |     0.003 |       0.002 |      0.001 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
@@ -128,11 +128,11 @@ Table of Contents
 2.2 Clock Constraints
 ---------------------
 
-+------------+--------+-----------------+
-| Clock      | Domain | Constraint (ns) |
-+------------+--------+-----------------+
-| PL_CLK_125 | CLK    |             8.0 |
-+------------+--------+-----------------+
++---------+--------+-----------------+
+| Clock   | Domain | Constraint (ns) |
++---------+--------+-----------------+
+| clk_6ns | CLK    |             6.0 |
++---------+--------+-----------------+
 
 
 3. Detailed Reports
@@ -141,67 +141,69 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+-----------------------+-----------+
-| Name                  | Power (W) |
-+-----------------------+-----------+
-| SAD                   |     0.005 |
-|   cnt                 |    <0.001 |
-|   reg_PA              |    <0.001 |
-|     reg_gen[0].i_dff  |    <0.001 |
-|     reg_gen[1].i_dff  |    <0.001 |
-|     reg_gen[2].i_dff  |    <0.001 |
-|     reg_gen[3].i_dff  |    <0.001 |
-|     reg_gen[4].i_dff  |    <0.001 |
-|     reg_gen[5].i_dff  |    <0.001 |
-|     reg_gen[6].i_dff  |    <0.001 |
-|     reg_gen[7].i_dff  |    <0.001 |
-|   reg_PB              |    <0.001 |
-|     reg_gen[0].i_dff  |    <0.001 |
-|     reg_gen[1].i_dff  |    <0.001 |
-|     reg_gen[2].i_dff  |    <0.001 |
-|     reg_gen[3].i_dff  |    <0.001 |
-|     reg_gen[4].i_dff  |    <0.001 |
-|     reg_gen[5].i_dff  |    <0.001 |
-|     reg_gen[6].i_dff  |    <0.001 |
-|     reg_gen[7].i_dff  |    <0.001 |
-|   reg_loop            |    <0.001 |
-|     reg_gen[0].i_dff  |    <0.001 |
-|     reg_gen[10].i_dff |    <0.001 |
-|     reg_gen[11].i_dff |    <0.001 |
-|     reg_gen[12].i_dff |    <0.001 |
-|     reg_gen[13].i_dff |    <0.001 |
-|     reg_gen[14].i_dff |    <0.001 |
-|     reg_gen[15].i_dff |    <0.001 |
-|     reg_gen[1].i_dff  |    <0.001 |
-|     reg_gen[2].i_dff  |    <0.001 |
-|     reg_gen[3].i_dff  |    <0.001 |
-|     reg_gen[4].i_dff  |    <0.001 |
-|     reg_gen[5].i_dff  |    <0.001 |
-|     reg_gen[6].i_dff  |    <0.001 |
-|     reg_gen[7].i_dff  |    <0.001 |
-|     reg_gen[8].i_dff  |    <0.001 |
-|     reg_gen[9].i_dff  |    <0.001 |
-|   reg_out             |    <0.001 |
-|     reg_gen[0].i_dff  |    <0.001 |
-|     reg_gen[10].i_dff |    <0.001 |
-|     reg_gen[11].i_dff |    <0.001 |
-|     reg_gen[12].i_dff |    <0.001 |
-|     reg_gen[13].i_dff |    <0.001 |
-|     reg_gen[14].i_dff |    <0.001 |
-|     reg_gen[15].i_dff |    <0.001 |
-|     reg_gen[1].i_dff  |    <0.001 |
-|     reg_gen[2].i_dff  |    <0.001 |
-|     reg_gen[3].i_dff  |    <0.001 |
-|     reg_gen[4].i_dff  |    <0.001 |
-|     reg_gen[5].i_dff  |    <0.001 |
-|     reg_gen[6].i_dff  |    <0.001 |
-|     reg_gen[7].i_dff  |    <0.001 |
-|     reg_gen[8].i_dff  |    <0.001 |
-|     reg_gen[9].i_dff  |    <0.001 |
-|   siso                |    <0.001 |
-|     SISOgen[0].i_dff  |    <0.001 |
-|     SISOgen[1].i_dff  |    <0.001 |
-|   sub                 |    <0.001 |
-+-----------------------+-----------+
++-------------------------+-----------+
+| Name                    | Power (W) |
++-------------------------+-----------+
+| SAD                     |     0.007 |
+|   cnt                   |    <0.001 |
+|   phaseacc              |    <0.001 |
+|     i_reg               |    <0.001 |
+|       reg_gen[0].i_dff  |    <0.001 |
+|       reg_gen[10].i_dff |    <0.001 |
+|       reg_gen[11].i_dff |    <0.001 |
+|       reg_gen[12].i_dff |    <0.001 |
+|       reg_gen[13].i_dff |    <0.001 |
+|       reg_gen[14].i_dff |    <0.001 |
+|       reg_gen[15].i_dff |    <0.001 |
+|       reg_gen[1].i_dff  |    <0.001 |
+|       reg_gen[2].i_dff  |    <0.001 |
+|       reg_gen[3].i_dff  |    <0.001 |
+|       reg_gen[4].i_dff  |    <0.001 |
+|       reg_gen[5].i_dff  |    <0.001 |
+|       reg_gen[6].i_dff  |    <0.001 |
+|       reg_gen[7].i_dff  |    <0.001 |
+|       reg_gen[8].i_dff  |    <0.001 |
+|       reg_gen[9].i_dff  |    <0.001 |
+|   reg_PA                |    <0.001 |
+|     reg_gen[0].i_dff    |    <0.001 |
+|     reg_gen[1].i_dff    |    <0.001 |
+|     reg_gen[2].i_dff    |    <0.001 |
+|     reg_gen[3].i_dff    |    <0.001 |
+|     reg_gen[4].i_dff    |    <0.001 |
+|     reg_gen[5].i_dff    |    <0.001 |
+|     reg_gen[6].i_dff    |    <0.001 |
+|     reg_gen[7].i_dff    |    <0.001 |
+|   reg_PB                |    <0.001 |
+|     reg_gen[0].i_dff    |    <0.001 |
+|     reg_gen[1].i_dff    |    <0.001 |
+|     reg_gen[2].i_dff    |    <0.001 |
+|     reg_gen[3].i_dff    |    <0.001 |
+|     reg_gen[4].i_dff    |    <0.001 |
+|     reg_gen[5].i_dff    |    <0.001 |
+|     reg_gen[6].i_dff    |    <0.001 |
+|     reg_gen[7].i_dff    |    <0.001 |
+|   reg_out               |    <0.001 |
+|     reg_gen[0].i_dff    |    <0.001 |
+|     reg_gen[10].i_dff   |    <0.001 |
+|     reg_gen[11].i_dff   |    <0.001 |
+|     reg_gen[12].i_dff   |    <0.001 |
+|     reg_gen[13].i_dff   |    <0.001 |
+|     reg_gen[14].i_dff   |    <0.001 |
+|     reg_gen[15].i_dff   |    <0.001 |
+|     reg_gen[1].i_dff    |    <0.001 |
+|     reg_gen[2].i_dff    |    <0.001 |
+|     reg_gen[3].i_dff    |    <0.001 |
+|     reg_gen[4].i_dff    |    <0.001 |
+|     reg_gen[5].i_dff    |    <0.001 |
+|     reg_gen[6].i_dff    |    <0.001 |
+|     reg_gen[7].i_dff    |    <0.001 |
+|     reg_gen[8].i_dff    |    <0.001 |
+|     reg_gen[9].i_dff    |    <0.001 |
+|   siso                  |    <0.001 |
+|     SISOgen[0].i_dff    |    <0.001 |
+|     SISOgen[1].i_dff    |    <0.001 |
+|     SISOgen[2].i_dff    |    <0.001 |
+|   sub                   |    <0.001 |
++-------------------------+-----------+
 
 

@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
-| Date         : Sun May 27 11:15:00 2018
+| Date         : Fri Jun 01 11:49:35 2018
 | Host         : fu-Win10 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file SAD_control_sets_placed.rpt
 | Design       : SAD
@@ -23,7 +23,7 @@ Table of Contents
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
 | Number of unique control sets                            |     4 |
-| Unused register locations in slices containing registers |     6 |
+| Unused register locations in slices containing registers |     5 |
 +----------------------------------------------------------+-------+
 
 
@@ -33,11 +33,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              32 |            9 |
-| No           | No                    | Yes                    |              34 |           11 |
+| No           | No                    | No                     |              32 |           11 |
+| No           | No                    | Yes                    |              35 |           13 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |              16 |            3 |
+| Yes          | No                    | Yes                    |              16 |            6 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -49,9 +49,9 @@ Table of Contents
 |  Clock Signal  | Enable Signal |         Set/Reset Signal        | Slice Load Count | Bel Load Count |
 +----------------+---------------+---------------------------------+------------------+----------------+
 |  CLK_IBUF_BUFG |               | reg_PA/reg_gen[7].i_dff/q_reg_0 |                5 |             16 |
-|  CLK_IBUF_BUFG | cnt/q_reg     | RST_IBUF                        |                3 |             16 |
-|  CLK_IBUF_BUFG |               | RST_IBUF                        |                6 |             18 |
-|  CLK_IBUF_BUFG |               |                                 |                9 |             32 |
+|  CLK_IBUF_BUFG | cnt/q_reg     | RST_IBUF                        |                6 |             16 |
+|  CLK_IBUF_BUFG |               | RST_IBUF                        |                8 |             19 |
+|  CLK_IBUF_BUFG |               |                                 |               11 |             32 |
 +----------------+---------------+---------------------------------+------------------+----------------+
 
 

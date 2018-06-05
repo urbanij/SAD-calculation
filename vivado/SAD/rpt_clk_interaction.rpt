@@ -1,0 +1,22 @@
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
+| Date         : Fri Jun 01 12:47:14 2018
+| Host         : fu-Win10 running 64-bit major release  (build 9200)
+| Command      : report_clock_interaction -file rpt_clk_interaction.rpt
+| Design       : SAD
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+------------------------------------------------------------------------------------
+
+Clock Interaction Report
+
+Clock Interaction Table
+-----------------------
+
+                            WNS                            TNS Failing  TNS Total    WNS Path         Clock-Pair           Inter-Clock  
+From Clock    To Clock      Clock Edges  WNS(ns)  TNS(ns)    Endpoints    Endpoints  Requirement(ns)  Classification       Constraints  
+------------  ------------  -----------  -------  -------  -----------  -----------  ---------------  -------------------  -----------  
+clk_6ns       clk_6ns       rise - rise     0.18     0.00            0           82             6.00  Clean                Timed        
+
+

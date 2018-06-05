@@ -2,194 +2,119 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Sun May 27 11:07:54 2018
-# Process ID: 9268
-# Current directory: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10916 C:\Users\fu\Dropbox\UNI\MASTER\1M\PSM\DIGITALE\2018_vhdl\4-Final-project\SAD\vivado\SAD\SAD.xpr
-# Log file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/vivado.log
-# Journal file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD\vivado.jou
+# Start of session at: Fri Jun 01 11:46:38 2018
+# Process ID: 7924
+# Current directory: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10356 C:\Users\fu\Dropbox\UNI\MASTER\1M\PSM\DIGITALE\VHDL_designs\Final-project\SAD\vivado\SAD\SAD.xpr
+# Log file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/vivado.log
+# Journal file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.xpr
+open_project C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.xpr
 INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
-Current project path is 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD'
+Current project path is 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD'
 Scanning sources...
 Finished scanning sources
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2016.4/data/ip'.
-synth_design -rtl -name rtl_1
-Command: synth_design -rtl -name rtl_1
-Starting synth_design
-Using part: xc7z010clg400-1
-Top: SAD
----------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:31 ; elapsed = 00:00:26 . Memory (MB): peak = 790.777 ; gain = 580.617
----------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'SAD' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:42]
-	Parameter Npixel bound to: 16 - type: integer 
-	Parameter Nbit bound to: 8 - type: integer 
-	Parameter SAD_bits bound to: 16 - type: integer 
-	Parameter N bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'PIPOreg' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:20' bound to instance 'reg_PA' of component 'PIPOreg' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:156]
-INFO: [Synth 8-638] synthesizing module 'PIPOreg' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:31]
-	Parameter N bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-638] synthesizing module 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:32]
-INFO: [Synth 8-256] done synthesizing module 'dff' (1#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:32]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-256] done synthesizing module 'PIPOreg' (2#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:31]
-	Parameter N bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'PIPOreg' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:20' bound to instance 'reg_PB' of component 'PIPOreg' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:160]
-	Parameter Nbit bound to: 8 - type: integer 
-INFO: [Synth 8-3491] module 'subtractor' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/subtractor.vhd:22' bound to instance 'sub' of component 'subtractor' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:176]
-INFO: [Synth 8-638] synthesizing module 'subtractor' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/subtractor.vhd:32]
-	Parameter Nbit bound to: 8 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'subtractor' (3#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/subtractor.vhd:32]
-	Parameter N bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'rca' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:23' bound to instance 'add' of component 'rca' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:181]
-INFO: [Synth 8-638] synthesizing module 'rca' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:40]
-	Parameter N bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-638] synthesizing module 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:29]
-INFO: [Synth 8-256] done synthesizing module 'fa' (4#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:29]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-3491] module 'fa' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/fa.vhd:22' bound to instance 'i_fa' of component 'fa' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:62]
-INFO: [Synth 8-256] done synthesizing module 'rca' (5#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/rca.vhd:40]
-	Parameter N bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'PIPOreg' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:20' bound to instance 'reg_loop' of component 'PIPOreg' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:186]
-INFO: [Synth 8-638] synthesizing module 'PIPOreg__parameterized2' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:31]
-	Parameter N bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-256] done synthesizing module 'PIPOreg__parameterized2' (5#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:31]
-	Parameter Nbit bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'mux2to1' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/mux2to1.vhd:19' bound to instance 'mux1' of component 'mux2to1' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:193]
-INFO: [Synth 8-638] synthesizing module 'mux2to1' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/mux2to1.vhd:30]
-	Parameter Nbit bound to: 16 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'mux2to1' (6#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/mux2to1.vhd:30]
-	Parameter N bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'PIPOreg' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:20' bound to instance 'reg_out' of component 'PIPOreg' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:197]
-INFO: [Synth 8-638] synthesizing module 'PIPOreg__parameterized4' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:31]
-	Parameter N bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:45]
-INFO: [Synth 8-256] done synthesizing module 'PIPOreg__parameterized4' (6#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/PIPOreg.vhd:31]
-	Parameter N bound to: 2 - type: integer 
-INFO: [Synth 8-3491] module 'SISOreg' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SISOreg.vhd:22' bound to instance 'siso' of component 'SISOreg' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:206]
-INFO: [Synth 8-638] synthesizing module 'SISOreg' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SISOreg.vhd:33]
-	Parameter N bound to: 2 - type: integer 
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SISOreg.vhd:53]
-INFO: [Synth 8-3491] module 'dff' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/dff.vhd:21' bound to instance 'i_dff' of component 'dff' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SISOreg.vhd:53]
-INFO: [Synth 8-256] done synthesizing module 'SISOreg' (7#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SISOreg.vhd:33]
-	Parameter overflow_val bound to: 16 - type: integer 
-INFO: [Synth 8-3491] module 'counter' declared at 'C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/counter.vhd:24' bound to instance 'cnt' of component 'counter' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:212]
-INFO: [Synth 8-638] synthesizing module 'counter' [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/counter.vhd:38]
-	Parameter overflow_val bound to: 16 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'counter' (8#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/counter.vhd:38]
-INFO: [Synth 8-256] done synthesizing module 'SAD' (9#1) [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/SAD.vhd:42]
----------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:31 ; elapsed = 00:00:26 . Memory (MB): peak = 811.004 ; gain = 600.844
----------------------------------------------------------------------------------
-
-Report Check Netlist: 
-+------+------------------+-------+---------+-------+------------------+
-|      |Item              |Errors |Warnings |Status |Description       |
-+------+------------------+-------+---------+-------+------------------+
-|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
-+------+------------------+-------+---------+-------+------------------+
----------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:31 ; elapsed = 00:00:26 . Memory (MB): peak = 811.004 ; gain = 600.844
----------------------------------------------------------------------------------
-INFO: [Device 21-403] Loading part xc7z010clg400-1
-INFO: [Project 1-570] Preparing netlist for logic optimization
-
-Processing XDC Constraints
-Initializing timing engine
-Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.srcs/constrs_1/new/CLK_125.xdc]
-Finished Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.srcs/constrs_1/new/CLK_125.xdc]
-Completed Processing XDC Constraints
-
-INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
-
-RTL Elaboration Complete:  : Time (s): cpu = 00:00:43 ; elapsed = 00:00:35 . Memory (MB): peak = 1119.199 ; gain = 909.039
-93 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
-synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:13 . Memory (MB): peak = 1119.199 ; gain = 328.422
-write_schematic -format pdf -orientation landscape -scope visible C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/subtractor.pdf
-C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/subtractor.pdf
 open_run synth_1 -name synth_1
 Design is defaulting to impl run constrset: constrs_1
 Design is defaulting to synth run part: xc7z010clg400-1
 INFO: [Netlist 29-17] Analyzing 30 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2016.4
+INFO: [Device 21-403] Loading part xc7z010clg400-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.srcs/constrs_1/new/CLK_125.xdc]
-Finished Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.srcs/constrs_1/new/CLK_125.xdc]
+Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.srcs/constrs_1/new/clk_2n.xdc]
+Finished Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.srcs/constrs_1/new/clk_2n.xdc]
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-reset_run impl_1
+open_run: Time (s): cpu = 00:00:13 ; elapsed = 00:00:10 . Memory (MB): peak = 1067.539 ; gain = 292.254
+save_constraints
+reset_run synth_1
 launch_runs impl_1 -jobs 2
-[Sun May 27 11:14:30 2018] Launched impl_1...
-Run output will be captured here: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.runs/impl_1/runme.log
-report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -name timing_1
+WARNING: [Project 1-478] Design 'synth_1' is stale and will not be used when launching 'impl_1'
+[Fri Jun 01 11:48:30 2018] Launched synth_1...
+Run output will be captured here: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.runs/synth_1/runme.log
+[Fri Jun 01 11:48:30 2018] Launched impl_1...
+Run output will be captured here: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.runs/impl_1/runme.log
+close_design
+open_run impl_1
+INFO: [Netlist 29-17] Analyzing 30 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2016.4
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/.Xil/Vivado-7924-fu-Win10/dcp/SAD.xdc]
+Finished Parsing XDC File [C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/.Xil/Vivado-7924-fu-Win10/dcp/SAD.xdc]
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.047 . Memory (MB): peak = 1520.465 ; gain = 0.000
+Restored from archive | CPU: 0.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.047 . Memory (MB): peak = 1520.465 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+report_clock_networks -name {network_1}
 INFO: [Timing 38-35] Done setting XDC timing constraints.
+CRITICAL WARNING: [Chipscope 16-3] Cannot debug net 'CLK'; it is not accessible from the fabric routing.
+CRITICAL WARNING: [Chipscope 16-3] Cannot debug net 'CLK'; it is not accessible from the fabric routing.
+report_timing_summary -file timing_sum.rpt
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
 INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
-report_methodology -name ultrafast_methodology_1 -checks {PDRC-204 PDRC-190 TIMING-35 TIMING-34 TIMING-33 TIMING-32 TIMING-31 TIMING-30 TIMING-29 TIMING-28 TIMING-27 TIMING-26 TIMING-25 TIMING-24 TIMING-23 TIMING-22 TIMING-21 TIMING-20 TIMING-19 TIMING-18 TIMING-17 TIMING-16 TIMING-15 TIMING-14 TIMING-13 TIMING-12 TIMING-11 TIMING-10 TIMING-9 TIMING-8 TIMING-7 TIMING-6 TIMING-5 TIMING-4 TIMING-3 TIMING-2 TIMING-1 XDCV-2 XDCV-1 XDCH-2 XDCH-1 XDCC-8 XDCC-7 XDCC-6 XDCC-5 XDCC-4 XDCC-3 XDCC-2 XDCC-1 XDCB-4 XDCB-3 XDCB-2 XDCB-1 CLKC-53 CLKC-52 CLKC-51 CLKC-50 CLKC-49 CLKC-48 CLKC-47 CLKC-46 CLKC-45 CLKC-44 CLKC-34 CLKC-43 CLKC-33 CLKC-42 CLKC-40 CLKC-32 CLKC-30 CLKC-28 CLKC-26 CLKC-24 CLKC-22 CLKC-41 CLKC-39 CLKC-31 CLKC-29 CLKC-27 CLKC-25 CLKC-23 CLKC-21 CLKC-17 CLKC-13 CLKC-16 CLKC-12 CLKC-15 CLKC-11 CLKC-14 CLKC-10 CLKC-8 CLKC-7 CLKC-6 CLKC-9 CLKC-5 CLKC-38 CLKC-37 CLKC-36 CLKC-35 CLKC-4 CLKC-20 CLKC-19 CLKC-18 CLKC-3 CLKC-2 CLKC-1 HPDR-1 CKLD-2 CKLD-1 SYNTH-14 SYNTH-13 SYNTH-12 SYNTH-11 SYNTH-10 SYNTH-9 SYNTH-16 SYNTH-15 SYNTH-6 SYNTH-5 SYNTH-4}
-INFO: [Timing 38-35] Done setting XDC timing constraints.
-INFO: [DRC 23-133] Running Methodology with 2 threads
+report_timing_summary -file timing_summary.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+report_utilization -file report_utilization.rpt
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1687.895 ; gain = 0.000
+C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/report_utilization.rpt
+report_timing_summary -file rpt_timing_summary.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+report_utilization -file rpt_utilization.rpt
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1687.895 ; gain = 0.000
+C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/rpt_utilization.rpt
+report_route_status -file rpt_route_status.rpt
+report_power -file rpt_power.rpt
+Command: report_power -file rpt_power.rpt
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+0 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+report_clock_networks -file rpt_clk_networks.rpt
+rpt_clk_networks.rpt
+report_clock_interaction
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.4 (win64) Build 1756540 Mon Jan 23 19:11:23 MST 2017
+| Date         : Fri Jun 01 12:47:02 2018
+| Host         : fu-Win10 running 64-bit major release  (build 9200)
+| Command      : report_clock_interaction
+| Design       : SAD
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.11 2014-09-11
+------------------------------------------------------------------------------------
+
+Clock Interaction Report
+
+Clock Interaction Table
+-----------------------
+
+                            WNS                            TNS Failing  TNS Total    WNS Path         Clock-Pair           Inter-Clock  
+From Clock    To Clock      Clock Edges  WNS(ns)  TNS(ns)    Endpoints    Endpoints  Requirement(ns)  Classification       Constraints  
+------------  ------------  -----------  -------  -------  -----------  -----------  ---------------  -------------------  -----------  
+clk_6ns       clk_6ns       rise - rise     0.18     0.00            0           82             6.00  Clean                Timed        
+
+
+report_clock_interaction -file rpt_clk_interaction.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+report_route_status -file rpt_route_status.rpt
 exit
-INFO: [Common 17-206] Exiting Vivado at Sun May 27 11:22:45 2018...
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 01 12:49:22 2018...

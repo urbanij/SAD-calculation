@@ -2,20 +2,31 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Sun May 27 11:07:54 2018
-# Process ID: 9268
-# Current directory: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10916 C:\Users\fu\Dropbox\UNI\MASTER\1M\PSM\DIGITALE\2018_vhdl\4-Final-project\SAD\vivado\SAD\SAD.xpr
-# Log file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/vivado.log
-# Journal file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD\vivado.jou
+# Start of session at: Fri Jun 01 11:46:38 2018
+# Process ID: 7924
+# Current directory: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10356 C:\Users\fu\Dropbox\UNI\MASTER\1M\PSM\DIGITALE\VHDL_designs\Final-project\SAD\vivado\SAD\SAD.xpr
+# Log file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/vivado.log
+# Journal file: C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/vivado/SAD/SAD.xpr
-synth_design -rtl -name rtl_1
-write_schematic -format pdf -orientation landscape -scope visible C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/2018_vhdl/4-Final-project/SAD/src/subtractor.pdf
+open_project C:/Users/fu/Dropbox/UNI/MASTER/1M/PSM/DIGITALE/VHDL_designs/Final-project/SAD/vivado/SAD/SAD.xpr
 open_run synth_1 -name synth_1
-reset_run impl_1
+save_constraints
+reset_run synth_1
 launch_runs impl_1 -jobs 2
 wait_on_run impl_1
-report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -name timing_1
-report_methodology -name ultrafast_methodology_1 -checks {PDRC-204 PDRC-190 TIMING-35 TIMING-34 TIMING-33 TIMING-32 TIMING-31 TIMING-30 TIMING-29 TIMING-28 TIMING-27 TIMING-26 TIMING-25 TIMING-24 TIMING-23 TIMING-22 TIMING-21 TIMING-20 TIMING-19 TIMING-18 TIMING-17 TIMING-16 TIMING-15 TIMING-14 TIMING-13 TIMING-12 TIMING-11 TIMING-10 TIMING-9 TIMING-8 TIMING-7 TIMING-6 TIMING-5 TIMING-4 TIMING-3 TIMING-2 TIMING-1 XDCV-2 XDCV-1 XDCH-2 XDCH-1 XDCC-8 XDCC-7 XDCC-6 XDCC-5 XDCC-4 XDCC-3 XDCC-2 XDCC-1 XDCB-4 XDCB-3 XDCB-2 XDCB-1 CLKC-53 CLKC-52 CLKC-51 CLKC-50 CLKC-49 CLKC-48 CLKC-47 CLKC-46 CLKC-45 CLKC-44 CLKC-34 CLKC-43 CLKC-33 CLKC-42 CLKC-40 CLKC-32 CLKC-30 CLKC-28 CLKC-26 CLKC-24 CLKC-22 CLKC-41 CLKC-39 CLKC-31 CLKC-29 CLKC-27 CLKC-25 CLKC-23 CLKC-21 CLKC-17 CLKC-13 CLKC-16 CLKC-12 CLKC-15 CLKC-11 CLKC-14 CLKC-10 CLKC-8 CLKC-7 CLKC-6 CLKC-9 CLKC-5 CLKC-38 CLKC-37 CLKC-36 CLKC-35 CLKC-4 CLKC-20 CLKC-19 CLKC-18 CLKC-3 CLKC-2 CLKC-1 HPDR-1 CKLD-2 CKLD-1 SYNTH-14 SYNTH-13 SYNTH-12 SYNTH-11 SYNTH-10 SYNTH-9 SYNTH-16 SYNTH-15 SYNTH-6 SYNTH-5 SYNTH-4}
+close_design
+open_run impl_1
+report_clock_networks -name {network_1}
+report_timing_summary -file timing_sum.rpt
+report_timing_summary -file timing_summary.rpt
+report_utilization -file report_utilization.rpt
+report_timing_summary -file rpt_timing_summary.rpt
+report_utilization -file rpt_utilization.rpt
+report_route_status -file rpt_route_status.rpt
+report_power -file rpt_power.rpt
+report_clock_networks -file rpt_clk_networks.rpt
+report_clock_interaction
+report_clock_interaction -file rpt_clk_interaction.rpt
+report_route_status -file rpt_route_status.rpt
