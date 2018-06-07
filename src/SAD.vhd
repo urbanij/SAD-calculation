@@ -10,13 +10,12 @@
 ---------------------------------------------
 -- Description : Actual SAD calculator (top level)
 ---------------------------------------------
--- Update      :
+-- Update      : 
 ---------------------------------------------
 
 
 library ieee;
 use ieee.std_logic_1164.all;
--- use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 
 
@@ -95,19 +94,6 @@ architecture struct of SAD is
 		) ;
 	end component ;
 
-	component SISOreg is
-		generic (N  : positive );
-		port (
-			SI   : in std_logic;
-			clk  : in std_logic;
-			rst  : in std_logic;
-			SO   : out std_logic
-		);
-
-	end component;
-
-
-
 
 	-- intermediate signals
 	signal padding               : std_logic_vector(SAD_bits-Nbit-1 downto 0); 
@@ -125,9 +111,6 @@ architecture struct of SAD is
 
 	signal pa_in                 : std_logic_vector(SAD_bits-1 downto 0);
                                    -- input to the phase accumulator
-	
-	signal counter_in            : std_logic; 
-                                   -- input to the counter enable pin
 
 	signal pa_out                : std_logic_vector(SAD_bits-1 downto 0); 
                                    -- phase accumulator output wire
@@ -141,20 +124,22 @@ architecture struct of SAD is
 	signal sad_wire              : std_logic_vector(SAD_bits-1 downto 0); 
                                    -- output-register output (i.e. the actual SAD signal)
 	
-	signal tc_wire               : std_logic; -- output of the counter
-	signal hold_wire             : std_logic; -- input to the MUX control signal. 
-	                                          -- it also coincides with DATA_VALID
+	signal tc_wire               : std_logic; 
+	                               -- output of the counter
+	signal hold_wire             : std_logic; 
+	                               -- input to the MUX control signal. 
+	                               -- it also coincides with DATA_VALID
 	
-	constant counter_of_value    : positive := Npixel+3; -- counter overflow value
-
-
+	constant counter_of_value    : positive := Npixel+3; 
+	                               -- counter overflow value, "+2" takes into account
+	                               -- the delay caused by the upper chain, i.e.
+	                               -- to get from PA to SAD.
 
 
 begin
 		
 	rst_input_registers <= EN nand (not RST);
 	hold_wire           <= EN nand (not tc_wire);
-
 
 
 	reg_PA : PIPOreg
@@ -166,7 +151,7 @@ begin
 		port map (CLK, rst_input_registers, PB, PB_to_sub_nbit);
 
 
-	-- generating a bunch of zeros to make the padding.
+	-- generating some zeros to make the padding.
 	gen_padding : for i in 0 to SAD_bits-Nbit-1 generate
 		padding(i) <= '0';
 	end generate;
@@ -211,5 +196,3 @@ begin
 
 
 end architecture;
-
-

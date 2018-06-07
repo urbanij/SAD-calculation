@@ -171,10 +171,11 @@ but can be extended to any number of bits, later in the code.
 \item the multiplexer following the PA has the function to freeze the value of the output SAD when it must not be changed, that's why the control signal of the MUX depends upon \textit{enable} and \textit{DATA\_VALID}, more specifically it is
  \texttt{S <= EN nand (not RESET)}, i.e. it lets the signal flow ahead only when \textit{enable} is \texttt{1} and \textit{DATA\_VALID} is \texttt{0};
  
- \item the counter counts up to $\texttt{px}^2$, which means that the whole image has been processed. It then sets its output to 1 until the system is newly reset;
+ \item the counter counts up to $\texttt{px}^2+3$, which means that the whole image has been processed. It then sets its output to 1 until the system is newly reset. 
  
- \item the SISO register delays counter enable by 3 clock cycles. This is because 3 clock-cycles is the time displacement between \textit{PA} and \textit{PB} entering the system and \textit{SAD} reacting to those two inputs. 
- Putting a delay on the counter enabler lets the system stay in sync and not erroneously set \textit{DATA\_VALID} to 1 before the actual calculation is completed.
+ This is because 3 clock-cycles is the propagation of \textit{PA} and \textit{PB} towards the system's output \textit{SAD}.
+ Putting such displacement lets the system stay in sync and not erroneously set \textit{DATA\_VALID} to 1 before the actual calculation is completed.
+
  
  \item since when \textit{enable} is not active the system is required to maintain its state, i.e. being transparent to the input signals \textit{PA} and \textit{PB}, the input reset signal into the "first stage" PIPO registers, is also driven by the \textit{enable} signal, more specifically:
 
@@ -214,7 +215,7 @@ and asks the user whether he wants to increase that number, called \texttt{SAD\_
 Secondly, the script generates two square matrices with random integer elements in the range $[0, 2^N)$, it calculates a third matrix whose elements are the magnitude of the difference of the former two matrices' elements and eventually it calculates the overall sum of it's elements, i.e. the expected SAD value.
 \newline
 
-Eventually it generates/overwrite the test bench file \texttt{./tb/tb\_SAD.vhd} coherently to the model so that comparing the model to the waveform result is a trivial task.
+Eventually it generates/overwrites the test bench file \texttt{./tb/tb\_SAD.vhd} coherently to the model so that comparing the model to the waveform result is a trivial task.
 \newline
 
 A second test bench has also been developed first, for a quick debug: two values of PA and PB enters the system without ever changing -- say PA=0; PB=1 -- and checking SAD value to be equal to $\texttt{px}^2$ at the end of the calculation is a preliminary way to check whether the system's working correctly.
@@ -608,8 +609,6 @@ This is the source code for the top-level component \texttt{SAD.vhd}. This is al
 
 
 \begin{lstlisting}[language=vhdl]
-
-
 ---------------------------------------------
 -- Title       : SAD
 -- Project     : Final project: SAD Calculation
@@ -622,13 +621,12 @@ This is the source code for the top-level component \texttt{SAD.vhd}. This is al
 ---------------------------------------------
 -- Description : Actual SAD calculator (top level)
 ---------------------------------------------
--- Update      :
+-- Update      : 
 ---------------------------------------------
 
 
 library ieee;
 use ieee.std_logic_1164.all;
--- use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 
 
@@ -655,6 +653,7 @@ end entity SAD;
 architecture struct of SAD is
 	
 	-- DECLARING COMPONENTS NEEDED.
+
 	component PIPOreg is
 		generic (N : positive); -- N BITS PIPO REGISTER
 		port (
@@ -706,18 +705,6 @@ architecture struct of SAD is
 		) ;
 	end component ;
 
-	component SISOreg is
-		generic (N  : positive );
-		port (
-			SI   : in std_logic;
-			clk  : in std_logic;
-			rst  : in std_logic;
-			SO   : out std_logic
-		);
-
-	end component;
-
-
 
 	-- intermediate signals
 	signal padding               : std_logic_vector(SAD_bits-Nbit-1 downto 0); 
@@ -735,9 +722,6 @@ architecture struct of SAD is
 
 	signal pa_in                 : std_logic_vector(SAD_bits-1 downto 0);
                                    -- input to the phase accumulator
-	
-	signal counter_in            : std_logic; 
-                                   -- input to the counter enable pin
 
 	signal pa_out                : std_logic_vector(SAD_bits-1 downto 0); 
                                    -- phase accumulator output wire
@@ -754,13 +738,17 @@ architecture struct of SAD is
 	signal tc_wire               : std_logic; -- output of the counter
 	signal hold_wire             : std_logic; -- input to the MUX control signal. 
 	                                          -- it also coincides with DATA_VALID
+	
+	constant counter_of_value    : positive := Npixel+3; 
+	                               -- counter overflow value, "+3" takes into account
+	                               -- the delay caused by the upper chain, i.e.
+	                               -- to get from PA to SAD.
 
 
 begin
 		
 	rst_input_registers <= EN nand (not RST);
 	hold_wire           <= EN nand (not tc_wire);
-
 
 
 	reg_PA : PIPOreg
@@ -772,7 +760,7 @@ begin
 		port map (CLK, rst_input_registers, PB, PB_to_sub_nbit);
 
 
-	-- generating a bunch of zeros to make the padding.
+	-- generating some zeros to make the padding.
 	gen_padding : for i in 0 to SAD_bits-Nbit-1 generate
 		padding(i) <= '0';
 	end generate;
@@ -803,26 +791,18 @@ begin
 		port map (CLK, RST, mux_to_reg_out_wire, sad_wire);
 
 
-	-- SISO register made of 3 D flip-flops. 
-	-- Needed to delay the ENABLE signal going into the COUNT_ENABLE of the counter.
-	-- This was necessary in order to sync the upper path of the SAD calculation
-	-- and the COUNTER.
-	siso: SISOreg
-		generic map(3)
-		port map(EN, CLK, RST, counter_in);
-
-
 	-- counter instance
-	-- it counts up to Npixel * Npixel, after that it sets its output to 1,
+	-- it counts up to counter_of_value, after that it sets its output to 1,
 	-- hence the DATA_VALID signal of the system is high and the SAD value is frozen.
 	cnt: counter
-		generic map(Npixel)
-		port map(CLK, counter_in, RST, tc_wire);
+		generic map(counter_of_value)
+		port map(CLK, EN, RST, tc_wire);
 
 	
 	-- connection of the intermediate signals to the output of the SAD.
 	SAD        <= sad_wire;
 	DATA_VALID <= tc_wire;
+
 
 end architecture;
 
@@ -840,4 +820,3 @@ end architecture;
 
 
 \end{document}
-
